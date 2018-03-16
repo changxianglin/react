@@ -214,15 +214,18 @@ var IssueAdd = function (_React$Component4) {
     return IssueAdd;
 }(React.Component);
 
-var issues = [{
-    id: 1, status: 'Open', owner: 'Ravan',
-    created: new Date('2016-08-15'), effort: 5, completionDate: undefined,
-    title: 'Error in console when clicking Add'
-}, {
-    id: 2, status: 'Assigned', owner: 'Eddie',
-    created: new Date('2016-08-16'), effort: 14, completionDate: new Date('2016-08-30'),
-    title: 'Missing bottom border on panel'
-}];
+// const issues = [
+//     {
+//         id: 1, status: 'Open', owner: 'Ravan',
+//         created: new Date('2016-08-15'), effort: 5, completionDate: undefined,
+//         title: 'Error in console when clicking Add',
+//     },
+//     {
+//         id: 2, status: 'Assigned', owner: 'Eddie',
+//         created: new Date('2016-08-16'), effort: 14, completionDate: new Date('2016-08-30'),
+//         title: 'Missing bottom border on panel',
+//     },
+// ];
 
 var IssueList = function (_React$Component5) {
     _inherits(IssueList, _React$Component5);
@@ -243,14 +246,32 @@ var IssueList = function (_React$Component5) {
         value: function componentDidMount() {
             this.loadData();
         }
+
+        //loadData() {
+        //    setTimeout(() => {
+        //        this.setState({ issues: issues });
+        //    }, 500);
+        //}
+
     }, {
         key: 'loadData',
         value: function loadData() {
             var _this6 = this;
 
-            setTimeout(function () {
-                _this6.setState({ issues: issues });
-            }, 500);
+            fetch('/api/issues').then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log('Total count of records:', data_metadata._count);
+                data.records.forEach(function (issue) {
+                    issue.created = new Date(issue.created);
+                    if (issue.completionDate) {
+                        issue.completionDate = new Date(issue.completionDate);
+                    }
+                });
+                _this6.crateState({ issues: data.records });
+            }).catch(function (err) {
+                console.log(err);
+            });
         }
     }, {
         key: 'createIssue',

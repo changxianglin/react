@@ -1,7 +1,9 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 app.use(express.static('static'))
+app.use(bodyParser.json())
 
 const issues = [
   {
@@ -19,8 +21,16 @@ const issues = [
 ]
 
 app.use('/api/issues', (req, res) => {
-  const metadata = {total_count: issues.length}
-  res.json({_metadata: metadata, records: issues})
+  const newIssue = req.body
+  newIssue.id = issues.length + 1
+  newIssue.created = new Date()
+
+  if(!newIssue.status) {
+    newIssue.status = 'New'
+  }
+
+  issues.push(newIssue)
+  res.json(newIssue)
 })
 
 app.listen(3000, () => {
