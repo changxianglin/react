@@ -23,6 +23,14 @@ class TodoList extends Component {
     })
   }
 
+  handleItemClick(index) {
+    const list = [...this.state.list]
+    list.splice(index, 1)
+    this.setState({
+        list
+    })
+  }
+
   render() {
     return (
         <div>
@@ -35,7 +43,7 @@ class TodoList extends Component {
         <ul>
           {
             this.state.list.map((item, index) => {
-              return <li key = {index}>{item}</li>
+              return <li key = {index} onClick = {this.handleItemClick.bind(this, index)}>{item}</li>
             })
           }
         </ul>
