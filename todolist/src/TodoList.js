@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import TodoItem from './TodoItem'
 
 class TodoList extends Component {
   constructor(props) {
@@ -43,7 +43,8 @@ class TodoList extends Component {
         <ul>
           {
             this.state.list.map((item, index) => {
-              return <li key = {index} onClick = {this.handleItemClick.bind(this, index)}>{item}</li>
+              return <TodoItem key = {index} content = {item}/>
+              // return <li key = {index} onClick = {this.handleItemClick.bind(this, index)}>{item}</li>
             })
           }
         </ul>
