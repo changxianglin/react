@@ -15,7 +15,7 @@ const config = {
         loader: 'babel-loader',
         options: {
           presets: ['env'],
-          plugins: ['transform-class-properties']
+          plugins: ['transform-decorators-legacy', 'transform-class-properties']
         }
       }
     }]
