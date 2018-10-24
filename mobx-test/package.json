@@ -20,6 +20,10 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "mobx": "^5.5.2"
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.5",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   }
 }
