@@ -15,6 +15,13 @@ class TodoList extends Component{
         })
     }
 
+    handleBtnClick() {
+       this.setState({
+           list: [...this.state.list, this.state.inputValue],
+           inputValue: ''
+       })
+    }
+
     render() {
         return(
             <Fragment>
@@ -23,12 +30,14 @@ class TodoList extends Component{
                     value = {this.state.inputValue}
                     onChange={this.handleInputChange.bind(this)}
                 />
-                <button>提交</button>
+                <button onClick={this.handleBtnClick.bind(this)}>提交</button>
             </div>
             <div>
                 <ul>
-                <li>学英语</li>
-                <li>learn React</li>
+                    {this.state.list.map((item, index) => {
+                        return <li key = {index}>{item}</li>
+                    })
+                    }
                 </ul>
             </div>
         </Fragment>
