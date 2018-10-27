@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import './TodoList.css'
 
 class TodoList extends Component{
     constructor(props) {
@@ -34,7 +35,10 @@ class TodoList extends Component{
         return(
             <Fragment>
             <div>
+                <label htmlFor="inputArea">输入内容</label>
                 <input
+                    id={"inputArea"}
+                    className={"input"}
                     value = {this.state.inputValue}
                     onChange={this.handleInputChange.bind(this)}
                 />
