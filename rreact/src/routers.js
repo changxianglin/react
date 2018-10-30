@@ -12,7 +12,7 @@ const customHistory = createBrowserHistory();
 export default class Routers extends React.Component{
     render() {
         return(
-            <Router history={customHistory}>
+            <Router history = {customHistory}>
                 <div>
                     <ul>
                         <li>
