@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import { observer, PropTypes as ObservablePropTypes} from 'mobx-react'
 import PropTypes from 'prop-types'
 
@@ -28,7 +28,7 @@ class Store {
 
 var store = new Store()
 
-@observable
+@observer
 class TodoList extends React.Component {
     static propTypes = {
         store: PropTypes.shape({
