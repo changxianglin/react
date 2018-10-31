@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 import { observer, PropTypes as ObservablePropTypes} from 'mobx-react'
 import PropTypes from 'prop-types'
 
@@ -23,10 +23,24 @@ class Store {
         this.todos.unshift(new Todo(title))
     }
 
+    @computed get left() {
+        return this.todos.filter(todo => !todo.finished).length
+    }
 }
 
 
 var store = new Store()
+
+@observer
+class TodoItem extends Comment{
+    static propTypes = {
+        todo: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            finished: PropTypes.bool.isRequired
+        }).isRequired
+    }
+}
 
 @observer
 class TodoList extends React.Component {
@@ -61,6 +75,8 @@ class TodoList extends React.Component {
     }
 
     render() {
+        const store = this.props.store
+        const todos = store.todos
         return <div className= "todo-list">
             <header>
                 <form onSubmit={this.handleSubmit}>
@@ -71,8 +87,12 @@ class TodoList extends React.Component {
                            placeholder={"What need to finished ?"} />
                 </form>
             </header>
-            <ul></ul>
-            <footer></footer>
+            <ul>{todos.map(todo => {
+                return <li key = {todo.id} className="todo-item">
+                    <TodoItem todo = {todo} />
+                </li>
+            })}</ul>
+            <footer>{store.left} item(s) unfinished</footer>
         </div>
     }
 }
