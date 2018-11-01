@@ -1,9 +1,13 @@
 import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
-import { observable, action, computed } from 'mobx'
+import {trace, toJS, spy, observe, observable, action, computed } from 'mobx'
 import { observer, PropTypes as ObservablePropTypes} from 'mobx-react'
 import PropTypes from 'prop-types'
 
+
+// spy(event => {
+//     console.log(event)
+// })
 
 class Todo {
     id = Math.random()
@@ -22,6 +26,32 @@ class Todo {
 
 class Store {
     @observable todos = []
+
+    disposers = []
+
+    constructor() {
+        observe(this.todos, change => {
+            this.disposers.forEach(disposers => disposers())
+
+            this.disposers = []
+
+            for (let todo of change.object) {
+                var disposer = observe(todo, changex => {
+                    this.save()
+                    // console.log(changex)
+                })
+
+                this.disposers.push(disposer)
+            }
+                this.save()
+            // console.log(change)
+        })
+    }
+
+    save() {
+        localStorage.setItem('todos', JSON.stringify(toJS(this.todos)))
+        console.log(toJS(this.todos))
+    }
 
     @action.bound createTodo(title) {
         this.todos.unshift(new Todo(title))
@@ -54,7 +84,7 @@ class TodoItem extends React.Component{
         this.props.todo.toggle()
     }
 
-    render() {
+    render() {trace()
         const todo = this.props.todo
         return <Fragment>
             <input type="checkbox" className="toggle"
@@ -67,13 +97,31 @@ class TodoItem extends React.Component{
 }
 
 @observer
-class TodoList extends React.Component {
-    static propTypes = {
-        store: PropTypes.shape({
-            createTodo: PropTypes.func,
-            todos: ObservablePropTypes.observableArrayOf(ObservablePropTypes.observableObject).isRequired
-        }).isRequired
+class TodoFooter extends React.Component{
+
+    render() { trace()
+        const store = this.props.store
+        return  <footer>{store.left} item(s) unfinished</footer>
     }
+}
+
+@observer
+class TodoView extends React.Component{
+
+    render() {
+        const todos = this.props.todos
+        return todos.map(todo => {
+            return <li key = {todo.id} className="todo-item">
+                <TodoItem todo = {todo} />
+                <span className="delete"
+                      onClick={e => store.removeTodo(todo)}>X</span>
+            </li>
+        })
+    }
+}
+
+@observer
+class TodoHeader extends React.Component{
 
     state = { inputValue: ''}
 
@@ -99,26 +147,36 @@ class TodoList extends React.Component {
     }
 
     render() {
+        return <header>
+            <form onSubmit={this.handleSubmit}>
+                <input type="text"
+                       onChange={this.handleChange}
+                       value={this.state.inputValue}
+                       className="input"
+                       placeholder={"What need to finished ?"} />
+            </form>
+        </header>
+    }
+}
+
+@observer
+class TodoList extends React.Component {
+    static propTypes = {
+        store: PropTypes.shape({
+            createTodo: PropTypes.func,
+            todos: ObservablePropTypes.observableArrayOf(ObservablePropTypes.observableObject).isRequired
+        }).isRequired
+    }
+
+    render() {trace()
         const store = this.props.store
         const todos = store.todos
         return <div className= "todo-list">
-            <header>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text"
-                           onChange={this.handleChange}
-                           value={this.state.inputValue}
-                           className="input"
-                           placeholder={"What need to finished ?"} />
-                </form>
-            </header>
-            <ul>{todos.map(todo => {
-                return <li key = {todo.id} className="todo-item">
-                    <TodoItem todo = {todo} />
-                    <span className="delete"
-                          onClick={e => store.removeTodo(todo)}>X</span>
-                </li>
-            })}</ul>
-            <footer>{store.left} item(s) unfinished</footer>
+            <TodoHeader store = {store} />
+            <ul>
+                <TodoView todos = {todos} />
+            </ul>
+            <TodoFooter store = {store} />
         </div>
     }
 }
