@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearhWrapper } from "./style"
 
 class Header extends Component{
@@ -36,13 +37,19 @@ class Header extends Component{
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
                     <SearhWrapper>
-                        <NavSearch
-                            className = {this.state.focused ? "focused" : ""}
-                            onFocus = {this.handleInputFocus}
-                            onBlur = {this.handleInputBlur}
+                        <CSSTransition
+                            in = {this.state.focused}
+                            timeout = {200}
+                            classNames = "slide"
                         >
+                            <NavSearch
+                                className = {this.state.focused ? "focused" : ""}
+                                onFocus = {this.handleInputFocus}
+                                onBlur = {this.handleInputBlur}
+                            >
 
-                        </NavSearch>
+                            </NavSearch>
+                        </CSSTransition>
                         <i className = {this.state.focused ? "focused iconfont" : "iconfont"}>&#xe6cf;</i>
                     </SearhWrapper>
                 </Nav>
