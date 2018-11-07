@@ -19,8 +19,13 @@ export default (state = defaultState, action) => {
             return state.set('mouseIn', true)
         case constants.MOUSE_LEAVE:
             return state.set('mouseIn', false)
+        case constants.CHANGE_PAGE:
+            return state.set('page', action.page)
         case constants.CHANGE_LIST:
-            return state.set('list', action.data).set('totalPage', action.totalPage)
+            return state.merge({
+                list: action.data,
+                totalPage: action.totalPage
+            })
         default:
             return state
 
