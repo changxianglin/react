@@ -30,6 +30,13 @@ const defaultState = fromJS({
         title: "霍建华退出微博：生而为人，我劝你嘴下积德",
         desc: "1 昨天，霍建华的华杰工作室在微博和facebook宣布关闭运营账号。 工作室的声明里这样写道：从今以后，只想用最纯粹的方式和大家交流，就是用影...",
         imgUrl: "//upload-images.jianshu.io/upload_images/102559-867f8d0cfbe86f98.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240",
+    }],
+    recommendList: [{
+        id: 1,
+        imgUrl: "//cdn2.jianshu.io/assets/web/banner-s-3-7123fd94750759acf7eca05b871e9d17.png",
+    }, {
+        id: 2,
+        imgUrl: "//cdn2.jianshu.io/assets/web/banner-s-4-b70da70d679593510ac93a172dfbaeaa.png",
     }]
 })
 

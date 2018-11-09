@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { WriterWapper } from '../style'
 
 class Writer extends Component{
     render() {
         return (
-            <div>Writer~</div>
+            <WriterWapper>Homework</WriterWapper>
         )
     }
 
