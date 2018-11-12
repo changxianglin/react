@@ -26,6 +26,6 @@ export const Contnent = styled.div`
         line-height: 30px;
     }
     b {
-        font-wight: bold;
+        font-weight: bold;
     }
 `

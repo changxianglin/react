@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { DetailWrapper, Header, Contnent } from './style'
 
 class Detail extends Component{
@@ -6,19 +7,18 @@ class Detail extends Component{
         return (
             <DetailWrapper>
                 <Header>
-                    我与蒋方舟？
+                    {this.props.title}
                 </Header>
-                <Contnent>
-                    <img src="//upload-images.jianshu.io/upload_images/3960383-cdbf5ecea69c8491.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/750/format/webp" alt=""/>
-                    <p><b>第一次有人说，我和蒋方舟长得像，其实没太在意，</b>因为这个人，我不认识，我在这里承认自己太low啦……</p>
-                    <p>第一次有人说，我和蒋方舟长得像，其实没太在意，因为这个人，我不认识，我在这里承认自己太low啦……</p>
-                    <p>第一次有人说，我和蒋方舟长得像，其实没太在意，因为这个人，我不认识，我在这里承认自己太low啦……</p>
-                    <p>第一次有人说，我和蒋方舟长得像，其实没太在意，因为这个人，我不认识，我在这里承认自己太low啦……</p>
-                </Contnent>
+                <Contnent dangerouslySetInnerHTML = {{__html: this.props.content}} />
             </DetailWrapper>
         )
     }
 
 }
 
-export default Detail
+const mapState = (state) => ({
+    title: state.getIn(['detail', 'title']),
+    content: state.getIn(['detail', 'content'])
+})
+
+export default connect(mapState, null)(Detail)
