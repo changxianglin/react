@@ -93,10 +93,12 @@ class Header extends Component{
                     </SearhWrapper>
                 </Nav>
                 <Addition>
-                    <Button className = "writting">
-                        <i className="iconfont">&#xe615;</i>
-                        写文章
-                    </Button>
+                    <Link to = "/write">
+                        <Button className = "writting">
+                            <i className="iconfont">&#xe615;</i>
+                            写文章
+                        </Button>
+                    </Link>
                     <Button className = "reg">注册</Button>
                 </Addition>
             </HeaderWrapper>
