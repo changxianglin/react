@@ -14,7 +14,7 @@ export const getDetail = (id) => {
         dispatch(changeDetail(result.title, result.content))
         console.log(res.data.data)
     }).catch((e) => {
-        
+
     })
     }
 }
