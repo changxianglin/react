@@ -4,6 +4,8 @@ import {trace, toJS, spy, observe, observable, action, computed } from 'mobx'
 import { observer, PropTypes as ObservablePropTypes} from 'mobx-react'
 import PropTypes from 'prop-types'
 
+require('./style.css')
+
 
 // spy(event => {
 //     console.log(event)
