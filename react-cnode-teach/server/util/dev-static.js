@@ -2,6 +2,7 @@ const axios = require('axios')
 const path = require('path')
 const webpack = require('webpack')
 const MemoryFs = require('memory-fs')
+const proxy = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
 
 const serverConfig = require('../../build/webpack.config.server')
@@ -33,18 +34,22 @@ serverCompiler.watch({}, (err, stats) => {
         serverConfig.output.filename
     )
 
-    const bundle = mfs.readFileSync(bundlePath)
+    const bundle = mfs.readFileSync(bundlePath, 'utf-8')
     const m = new Module()
     m._compile(bundle, 'server-entry.js')
-    serverBundle = m.default
+    serverBundle = m.exports.default
 })
 
 
 module.exports = function (app) {
+
+    app.use('/public', proxy({
+        target: 'http://localhost:8888'
+    }))
     
     app.get('*', function (req, res) {
         getTemplate().then(template => {
-            const content = ReactDomServer.renderToString(serverBundle, 'utf-8')
+            const content = ReactDomServer.renderToString(serverBundle)
             res.send(template.replace('<!-- app -->', content))
         })
     })
