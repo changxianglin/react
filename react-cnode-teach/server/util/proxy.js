@@ -26,5 +26,20 @@ module.exports = function (req, res, next) {
     header: {
       'Content-Type': 'application/x-www-form-urlencode'
     }
+  }).then(resp => {
+    if(resp.status === 200) {
+      res.send((resp.data))
+    } else {
+      res.status(resp.status).send(resp.data)
+    }
+  }).catch(err => {
+    if(err.response) {
+      res.status(500).send(err.response.data)
+    } else {
+      res.status(500).send({
+        success: false,
+        msg: '未知错误'
+      })
+    }
   })
 }

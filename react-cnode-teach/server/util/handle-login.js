@@ -3,7 +3,7 @@ const axios = require('axios')
 
 const baseUrl = 'http://cnodejs.org/api/v1'
 
-router.post('/login', function(req, res, next) => {
+router.post('/login', (req, res, next) => {
   axios.post(`${baseUrl}/accesstoken`, {
     accesstoken: req.accessToken
   }).then(resp => {
@@ -30,3 +30,5 @@ router.post('/login', function(req, res, next) => {
     }
   })
 })
+
+module.exports = router
