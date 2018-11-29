@@ -14,7 +14,7 @@ export default class TestApi extends React.Component{
 
   login() {
     axios.post('api/user/login', {
-      accessToken:  "e53f1fc5-7a1d-41f5-9798-6ceef27c9d25"
+      accessToken:  ""
     }).then(res => {
       console.log(res)
     }).catch(err => {
@@ -32,11 +32,11 @@ export default class TestApi extends React.Component{
 
   render() {
     return (
-      <div>
-        <button onClick={this.getTopics}>topics</button>
-        <button onClick={this.login}>login</button>
-        <button onClick={this.markAll}>markAll</button>
-      </div>
+        <div>
+          <button onClick={this.getTopics}>topics</button>
+          <button onClick={this.login}>login</button>
+          <button onClick={this.markAll}>markAll</button>
+        </div>
     )
   }
 }
