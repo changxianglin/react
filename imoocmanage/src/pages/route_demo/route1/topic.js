@@ -5,7 +5,7 @@ export default class Topic extends React.Component {
         return (
             <div>
             This is Topic page
-        </div>
+            </div>
         )
     }
 }
