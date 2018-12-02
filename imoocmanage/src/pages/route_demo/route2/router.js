@@ -1,6 +1,6 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import Main from './../route1/Main'
+import Main from './Main'
 import About from './../route1/about'
 import Topic from './../route1/topic'
 import Home from './Home'

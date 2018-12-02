@@ -5,7 +5,7 @@ import App from './App';
 import Life from './pages/demo/Life'
 import Admin from './admin'
 import Home from './pages/route_demo/route1/Home'
-import Router from './pages/route_demo/route2/router'
+import Router from './pages/route_demo/route3/router'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Router />, document.getElementById('root'));
