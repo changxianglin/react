@@ -16,6 +16,19 @@ export default class Modals extends React.Component {
         })
     }
 
+    handleConfirm = (type) => {
+        Modal[type]({
+            title: "确认？",
+            content: '确认是真的吗？',
+            onOk() {
+                
+            },
+            onCancel() {
+
+            }
+        })
+    }
+
     render() {
         return (
             <div>
@@ -25,12 +38,55 @@ export default class Modals extends React.Component {
                     <Button type = "primary" onClick = {() => this.handleOpen("showModal3")}>顶部20px弹框</Button>
                     <Button type = "primary" onClick = {() => this.handleOpen("showModal4")}>水平垂直居中</Button>
                 </Card>
+                <Card title = "信息确认框" className = "card-wrap">
+                    <Button type = "primary" onClick = {() => this.handleConfirm("confirm")}>Cofirm</Button>
+                    <Button type = "primary" onClick = {() => this.handleConfirm("info")}>Info</Button>
+                    <Button type = "primary" onClick = {() => this.handleConfirm("success")}>Success</Button>
+                    <Button type = "primary" onClick = {() => this.handleConfirm("warning")}>Warning</Button>
+                </Card>
                 <Modal
                     title = "React"
                     visible = {this.state.showModal1}
                     onCancel = {() =>{
                         this.setState({
                             showModal1: false
+                        })
+                    }}
+                >
+                    <p>继续学习弹出框的知识</p>
+                </Modal>
+                <Modal
+                    title = "React"
+                    visible = {this.state.showModal2}
+                    onText = '好的'
+                    cancelText = '算了'
+                    onCancel = {() =>{
+                        this.setState({
+                            showModal2: false
+                        })
+                    }}
+                >
+                    <p>继续学习弹出框的知识</p>
+                </Modal>
+                <Modal
+                    title = "React"
+                    style = {{top: "20px"}}
+                    visible = {this.state.showModal3}
+                    onCancel = {() =>{
+                        this.setState({
+                            showModal3: false
+                        })
+                    }}
+                >
+                    <p>继续学习弹出框的知识</p>
+                </Modal>
+                <Modal
+                    title = "React"
+                    wrapClassName = "vertical-center-modal"
+                    visible = {this.state.showModal4}
+                    onCancel = {() =>{
+                        this.setState({
+                            showModal4: false
                         })
                     }}
                 >
