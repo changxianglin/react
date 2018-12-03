@@ -9,7 +9,7 @@ class FormLogin extends React.Component {
         let userInfo = this.props.form.getFieldsValue()
         this.props.form.validateFields((err, values) => {
             if(!err) {
-                message.success(`${userInfo.userName} 恭喜你，您通过本次表单学习，当前密码为：${userInfo.userPwd}`)
+                message.success(`${userInfo.userName} 恭喜你，您通过本次表单学习，当前密码为：${userInfo.userPwd}, 记住密码：${userInfo.remember}`)
             }
         })
     }
