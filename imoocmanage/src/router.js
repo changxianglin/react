@@ -8,6 +8,7 @@ import NoMatch from './pages/nomatch';
 import Modals from './pages/ui/modals';
 import FormLogin from './pages/form/login';
 import FormRegister from './pages/form/register'
+import BasicTable from './pages/table/basicTable'
 
 export default class IRouter extends React.Component {
     render() {
@@ -21,7 +22,8 @@ export default class IRouter extends React.Component {
                             <Route path = "/admin/ui/buttons" component = {Buttons} />
                             <Route path = "/admin/ui/modals" component = {Modals} />
                             <Route path = "/admin/form/login" component = {FormLogin} />
-                            <Route paht = "/admin/form/reg" component = {FormRegister} />
+                            <Route path = "/admin/form/reg" component = {FormRegister} />
+                            <Route path = "/admin/table/basic" component = {BasicTable} />
                             <Route component = {NoMatch} />
                           </Switch>
                         </Admin>
