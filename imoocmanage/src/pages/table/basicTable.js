@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Table} from 'antd'
+import { Card, Table, Modal} from 'antd'
 import axios from './../../axios/index'
 
 export default class BasicTable extends React.Component {
@@ -40,8 +40,8 @@ export default class BasicTable extends React.Component {
                 time: '09:00'
             }
         ]
-        
-        data.map((item, index) => {
+
+        dataSource.map((item, index) => {
             item.key = index
         })
 
@@ -61,11 +61,26 @@ export default class BasicTable extends React.Component {
             }
         }).then((res) => {
             if(res.code === 0) {
+                res.result.map((item, index) => {
+                    item.key = index
+                })
                 this.setState({
                     dataSource2: res.result
                 })
             }
         })
+    }
+
+    onRowClick = (record, index) => {
+        let selectKey = [index]
+        Modal.info({
+            title: '信息',
+            content: `用户名: ${record.userName}, 用户爱好: ${record.interest}`
+        })
+        this.setState({
+            selectedRowKeys: selectKey,
+            selectedItem: record
+        })   
     }
 
     render() {
@@ -129,9 +144,11 @@ export default class BasicTable extends React.Component {
                 dataIndex: "time"
             }
         ]
-
+        
+        const { selectedRowKeys } = this.state
         const rowSelection = {
-            type: 'radio'
+            type: 'radio',
+            selectedRowKeys
         }
 
         return (
@@ -155,6 +172,14 @@ export default class BasicTable extends React.Component {
                 <Card title = "mock-单选" style = {{margin: "10px 0"}}>
                     <Table
                         bordered
+                        onRow={(record, index) => {
+                            return {
+                              onClick: () => {
+                                  this.onRowClick(record, index)
+                                }
+                            }
+                            }
+                        }
                         rowSelection = {rowSelection}
                         dataSource = {this.state.dataSource2}
                         columns = {columns}
