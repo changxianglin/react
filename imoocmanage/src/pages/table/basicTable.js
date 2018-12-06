@@ -8,6 +8,10 @@ export default class BasicTable extends React.Component {
         dataSource2: []
     }
 
+    param = {
+        page: 1
+    }
+
     componentDidMount() {
         const dataSource = [
             {
@@ -53,11 +57,12 @@ export default class BasicTable extends React.Component {
     }
 
     request = () => {
+        let _this = this
         axios.ajax({
             url: "/table/list",
             data: {
                 params: {
-                    page: 1
+                    page: this.param.page
                 }
             }
         }).then((res) => {
@@ -70,7 +75,8 @@ export default class BasicTable extends React.Component {
                     selectedRowKeys: [],
                     selectedRows: null,
                     pagination: Utils.pagination(res, (current) => {
-
+                        _this.param.page = current
+                        this.request()
                     }) 
                 })
             }
