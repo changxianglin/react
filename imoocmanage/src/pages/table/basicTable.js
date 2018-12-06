@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Table, Modal, Button, message} from 'antd'
 import axios from './../../axios/index'
+import Utils from './../../utils/utils';
 
 export default class BasicTable extends React.Component {
     state = {
@@ -61,13 +62,16 @@ export default class BasicTable extends React.Component {
             }
         }).then((res) => {
             if(res.code === 0) {
-                res.result.map((item, index) => {
+                res.result.list.map((item, index) => {
                     item.key = index
                 })
                 this.setState({
-                    dataSource2: res.result,
+                    dataSource2: res.result.list,
                     selectedRowKeys: [],
-                    selectedRows: null 
+                    selectedRows: null,
+                    pagination: Utils.pagination(res, (current) => {
+
+                    }) 
                 })
             }
         })
@@ -224,6 +228,14 @@ export default class BasicTable extends React.Component {
                         dataSource = {this.state.dataSource2}
                         columns = {columns}
                         pagination = {false}
+                    />
+                </Card>
+                <Card title = "mock-分页" style = {{margin: "10px 0"}}>
+                    <Table
+                        bordered
+                        dataSource = {this.state.dataSource2}
+                        columns = {columns}
+                        pagination = {this.state.pagination}
                     />
                 </Card>
             </div>
