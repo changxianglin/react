@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Form, Input, Button, message, Icon, Checkbox } from 'antd'
 import FormItem from 'antd/lib/form/FormItem';
+import './index.less'
 
 const FromItem = Form.Item
 
@@ -89,6 +90,19 @@ class FormLogin extends React.Component {
                         </FromItem>
                     </Form>
                 </Card>
+                <Card title = "修改默认样式">
+                    <Form layout = "inline">
+                        <FromItem>
+                            <Input id = "test" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        </FromItem>
+                        <FromItem>
+                            <Input id = "tochang" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        </FromItem>
+                        <FromItem>
+                            <Button type = "primary">登录</Button>
+                        </FromItem>
+                    </Form>
+                </Card>            
             </div>
         )
     }
