@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 
 class Counter extends Component {
     state = {
-        count: 0,
+        value: this.props.value,
         imageUrl: 'https://picsum.photos/200',
         tags: []
     }
 
-    constructor() {
-        super()
-        // console.log("Constructor", this) must have super()
-        this.handleIncrement = this.handleIncrement.bind(this)
-    }
+    // constructor() {
+    //     super()
+    //     // console.log("Constructor", this) must have super()
+    //     this.handleIncrement = this.handleIncrement.bind(this)
+    // }
 
     renderTags() {
         if (this.state.tags.length === 0) return <p>There are no tags</p>
@@ -19,16 +19,28 @@ class Counter extends Component {
         return <ul>{ this.state.tags.map(tag => <li key = { tag }>{ tag }</li>)}</ul>
     }
 
-    handleIncrement() {
-        console.log('Increment Clicked', this)
+    handleIncrement = product => {
+        console.log(product)
+        // console.log('Increment Clicked', this)
+        // this.state.count++
+        this.setState({
+            value: this.state.value + 1
+        })
+    }
+
+    doHandleIncrement = () => {
+        this.handleIncrement({id: 1})
     }
 
     render() { 
+        console.log('props', this.props)
         return (
             <React.Fragment>
+                { this.props.children }
+                <h4>{this.props.id}</h4>
                 <img src={this.state.imageUrl} alt=""/>
-                <span className = {this.getBadgeClasses()}>{this.state.count}</span>
-                <button onClick = {this.handleIncrement}>Increment</button>
+                <span className = {this.getBadgeClasses()}>{this.state.value}</span>
+                <button onClick = {this.doHandleIncrement}>Increment</button>
                 {this.state.tags.length === 0 && "Please create new tages!"}
                 { this.renderTags() }
             </React.Fragment>
