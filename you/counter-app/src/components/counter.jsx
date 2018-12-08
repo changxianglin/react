@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Counter extends Component {
     state = {
-        value: this.props.value,
+        value: this.props.counter.value,
         imageUrl: 'https://picsum.photos/200',
         tags: []
     }
@@ -41,6 +41,11 @@ class Counter extends Component {
                 <img src={this.state.imageUrl} alt=""/>
                 <span className = {this.getBadgeClasses()}>{this.state.value}</span>
                 <button onClick = {this.doHandleIncrement}>Increment</button>
+                <button 
+                    onClick = {() => this.props.onDelete(this.props.counter.id)}
+                >
+                    Delete
+                </button>
                 {this.state.tags.length === 0 && "Please create new tages!"}
                 { this.renderTags() }
             </React.Fragment>
