@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 class Counter extends Component {
+
     state = {
         value: this.props.counter.value,
         imageUrl: 'https://picsum.photos/200',
@@ -39,8 +40,9 @@ class Counter extends Component {
                 { this.props.children }
                 <h4>{this.props.id}</h4>
                 <img src={this.state.imageUrl} alt=""/>
-                <span className = {this.getBadgeClasses()}>{this.state.value}</span>
-                <button onClick = {this.doHandleIncrement}>Increment</button>
+                <span className = {this.getBadgeClasses()}>{this.formatCount()}</span>
+                <button onClick = {() => this.props.onIncrement(this.props.counter)}
+                >Increment</button>
                 <button 
                     onClick = {() => this.props.onDelete(this.props.counter.id)}
                 >
@@ -54,8 +56,13 @@ class Counter extends Component {
 
     getBadgeClasses() {
         let classes = "badge m-2 badge-"
-        classes += this.state.count === 0 ? "warning" : "primary"
+        classes += this.props.counter.value === 0 ? "warning" : "primary"
         return classes
+    }
+
+    formatCount() {
+        const { value } = this.props.counter
+        return value === 0 ? 'Zero': value
     }
 
 }
