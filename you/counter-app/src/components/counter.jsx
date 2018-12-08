@@ -4,6 +4,13 @@ class Counter extends Component {
     componentDidUpdate(prevProps, prevState) {
         console.log('prevProps', prevProps)
         console.log('prevState', prevState)
+        if(prevProps.counter.value !== this.props.counter.value) {
+            // ajax call and get new data form the server
+        }
+    }
+
+    componentWillUnmount() {
+        console.log('Counter - Unmount')
     }
 
     state = {
