@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class NavBar extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <nav>
-                NavBar
-            </nav>
-         );
-    }
+const NavBar = (props) => {
+    return ( 
+        <nav>
+            NavBar -- 
+            <span>
+                {props.totalCounters}
+            </span>
+        </nav>
+     );
 }
  
 export default NavBar;
