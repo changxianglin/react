@@ -10,7 +10,9 @@
     ]
   },
   "scripts": {
-    "dev": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --config config/webpack.dev.config.js",
+    "create": "webpack --config config/webpack.build.config.js",
+    "start": "webpack-dev-server --open",
     "build": "webpack"
   },
   "keywords": [],
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
     "css-loader": "^2.0.0",

@@ -7,6 +7,7 @@ class App extends React.Component {
     return (
       <div>
         Hello React
+        <p> can use es6</p>
       </div>
     )
   }
