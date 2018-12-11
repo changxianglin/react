@@ -4,4 +4,4 @@ class TodolistStore {
   @observable todoList = [{msg: "first msg"}, {msg: "second msg"}, {msg: "third msg"}]
 }
 
-export default new TodolistStore
+export default new TodolistStore()
