@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { observer, inject } from 'mobx-react'
+import { Button } from 'antd';
 
 @inject('TodolistStore')
 @observer
@@ -14,7 +15,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1> React project</h1>
         </header>
-        {todoList.map((entry, i) => <li key = {i}>{entry.msg}</li>)}
+        {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
       </div>
     );
   }
