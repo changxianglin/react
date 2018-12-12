@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Button} from 'antd'
+import { inject, observer} from 'mobx-react'
 
+@inject('TodoStore')
+@observer
 class App extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const bird = this.bird.value
+    this.props.TodoStore.addBird(bird)
+    this.bird.value = ''
+  }
+
   render() {
+    const { TodoStore } = this.props
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h2>You have {TodoStore.birdCount} birds.</h2>
+      
+        <form onSubmit = { e => this.handleSubmit(e)}>
+          <input type = 'text' placeholder = "Enter bird" ref = { input => this.bird = input} />
+          <button type="primary">Add bird</button>
+        </form>
+        {
+          TodoStore.birds.map((bird, index) => (
+            <Button key = {index}>{bird}</Button>
+          ))
+        }  
       </div>
     );
   }
