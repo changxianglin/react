@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'antd'
 import { inject, observer} from 'mobx-react'
+import Todo from './pages/todo'
 
 @inject('TodoStore')
 @observer
@@ -26,7 +27,7 @@ class App extends Component {
           TodoStore.birds.map((bird, index) => (
             <Button key = {index}>{bird}</Button>
           ))
-        }  
+        } 
       </div>
     );
   }

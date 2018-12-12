@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import Todo from './pages/todo'
+
 import { Provider } from 'mobx-react'
 import TodoStore from './stores/TodoStore'
 
@@ -13,7 +15,7 @@ const Root = (
     </Provider>    
 )
 
-ReactDOM.render(Root, document.getElementById('root'));
+ReactDOM.render(<Todo />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
