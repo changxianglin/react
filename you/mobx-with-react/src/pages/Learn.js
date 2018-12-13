@@ -1,33 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { observable, action } from 'mobx'
-import { observer } from 'react-dom'
+import { inject,  observer } from 'react-dom'
 
-var appState = observable({
-    timer: 0
-})
-
+@inject('learnStore')
 @observer 
-class TimerView extends React.Component {
-    onReset() {
-        this.props.appState.resetTimer();
-    }
-
+class TimerView extends Component {
     render() {
+        const { learnList } = this.props
+        console.log(learnList)
         return (
-            <button onClick={this.onReset.bind(this)}>
+            <button>
                 Seconds passed: {this.props.appState.timer}
             </button>
         )
     }
 }
 
-appState.resetTimer = action(function reset() {
-    appState.timer = 0;
-});
-
-setInterval(action(function tick() {
-    appState.timer += 1;
-}), 1000);
-
-ReactDOM.render(<TimerView appState={appState} />, document.body);
+export default TimerView
