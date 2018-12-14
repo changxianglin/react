@@ -21,6 +21,12 @@ class App extends Component {
           <h1> React project</h1>
         </header>
         {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
+        <Button>
+          <Link to = "/test">Test</Link>
+        </Button>
+        <Button>
+          <Link to = "/view">TimerView</Link>
+        </Button>
         {/* <Router>
           <div>
             <ul>
