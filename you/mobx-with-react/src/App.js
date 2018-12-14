@@ -6,6 +6,8 @@ import { Button } from 'antd';
 import TimerView from './pages/Learn'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import Test from './modal'
+
 @inject('TodolistStore')
 @observer
 class App extends Component {
@@ -19,23 +21,24 @@ class App extends Component {
         </header>
         {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
         <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/topics">Topics</Link>
+              </li>
+            </ul>
 
-        <hr />
-        <Route path="/about" component={TimerView} />
-      </div>
-      </Router>
+            <hr />
+            <Route path="/about" component={TimerView} />
+            <Route path="/test" component = {Test} />
+          </div>
+        </Router>
       </div>
     );
   }
