@@ -1,18 +1,40 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { inject,  observer } from 'react-dom'
+// import React, { Component } from 'react'
+// import { inject,  observer } from 'react-dom'
+// import { Button } from 'antd'
 
+// @inject('TodolistStore')
+// @observer
+// class TimerView extends Component {
+//     render() {
+//         const { todoList } = this.props.TodolistStore
+//         console.log(todoList)
+//         return (
+//             <button>
+//                 {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
+//             </button>
+//         )
+//     }
+// }
 
+// export default TimerView
+
+import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react'
+import { Button } from 'antd';
+
+@inject('TodolistStore')
+@observer
 class TimerView extends Component {
-    render() {
-        const { learnList } = this.props
-        console.log(learnList)
-        return (
-            <button>
-                Seconds passed: {this.props.appState.timer}
-            </button>
-        )
-    }
+  render() {
+    const { todoList } = this.props.TodolistStore
+    console.log(todoList)
+    return (
+      <div>
+        {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
+
+      </div>
+    );
+  }
 }
 
-export default TimerView
+export default TimerView;

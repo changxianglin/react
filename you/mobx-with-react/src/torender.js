@@ -1,13 +1,13 @@
 import React from 'react'
 
-class Test extends React.Component {
+class Torender extends React.Component {
     render() {
         return (
             <div>
-                This is a test page
+                {this.props.children}
             </div>
         )
     }
 }
 
-export default Test
+export default Torender

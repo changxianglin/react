@@ -1,24 +1,29 @@
 import React, { Component } from 'react'
-import { Provider } from 'mobx-react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import store from './stores'
+import Torender from './torender'
 import App from './App'
 import Apps from './modal'
 import TimerView from './pages/Learn'
+import { Provider } from 'mobx-react'
+import Test from './modal'
 
 class MRoute extends React.Component {
     render() {
         return(
             <div>
+                <Provider {...store}>
                     <BrowserRouter>
-                        <App>
+                        <Torender>
                             <Switch>
-                                <Route path = "/" component = {Apps} />
-                                <Route path = "/view" component = {TimerView} />
+                                <Route exact path = "/" component = {App} />
+                                <Route exact path = "/view" component = {TimerView} />
+                                <Route exact path = "/test" component = {Test} />
                                 <Route render = {() => {return <h1>Not Found</h1>}} />
                             </Switch>
-                        </App>    
+                        </Torender>    
                     </BrowserRouter>
+                </Provider>
             </div>
         )
     }

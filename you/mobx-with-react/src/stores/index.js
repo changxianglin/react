@@ -1,6 +1,7 @@
 import TodolistStore from './todolist.store'
-import learnStore from '../pages/store'
+import LearnStore from '../pages/store'
 
-export default { TodolistStore, learnStore }
+export default { TodolistStore, LearnStore }
+
 
 

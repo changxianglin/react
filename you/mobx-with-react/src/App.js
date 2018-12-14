@@ -13,6 +13,7 @@ import Test from './modal'
 class App extends Component {
   render() {
     const { todoList } = this.props.TodolistStore
+    console.log(todoList)
     return (
       <div className="App">
         <header className="App-header">
@@ -20,7 +21,7 @@ class App extends Component {
           <h1> React project</h1>
         </header>
         {todoList.map((entry, i) => <Button key = {i}>{entry.msg}</Button>)}
-        <Router>
+        {/* <Router>
           <div>
             <ul>
               <li>
@@ -38,7 +39,7 @@ class App extends Component {
             <Route path="/about" component={TimerView} />
             <Route path="/test" component = {Test} />
           </div>
-        </Router>
+        </Router> */}
       </div>
     );
   }
