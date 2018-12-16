@@ -18,6 +18,8 @@
 import React, { Component } from 'react';
 
 const modifyPropsHOC = (WrappedComponent) => class NewComponent extends WrappedComponent {
+    static displayName = `NewComponent(${getDisplayName(WrappedComponent)})`
+    
     componentWillMount() {
         alert('我是修改后的生命周期')
     }
@@ -30,6 +32,10 @@ const modifyPropsHOC = (WrappedComponent) => class NewComponent extends WrappedC
         const newProps = {...this.props, style: newStyle}
         return React.cloneElement(element, newProps, element.props.children)   
     }
+}
+
+function getDisplayName(WarppedComponent) {
+    return WarppedComponent.displayName || WarppedComponent.name || 'Component'
 }
 
 export default modifyPropsHOC
