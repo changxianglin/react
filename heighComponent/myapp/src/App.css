@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+
+.a-container {
+  width: 300px;
+  overflow: hidden;
+  display: inline-block;
+}
