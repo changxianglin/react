@@ -9,3 +9,11 @@
 
 高阶组件实例：
     react-redux 中的 connect
+
+编写高阶组件
+1. 实现一个普通组件
+1. 将普通组件使用函数包裹
+
+使用高阶组件
+1. higherOrderComponent(WrappedComponent)
+1. @higherOrderComponent
