@@ -17,3 +17,4 @@
 使用高阶组件
 1. higherOrderComponent(WrappedComponent)
 1. @higherOrderComponent
+1. [装饰器语法安装配置](https://www.cnblogs.com/zhourongcode/p/9875286.html)

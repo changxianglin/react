@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import A from './A'
 import d from './D'
 
+@d
 class B extends Component {
     render() {
         return (
@@ -12,4 +13,4 @@ class B extends Component {
     }
 }
 
-export default d(B)
+export default B
