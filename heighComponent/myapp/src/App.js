@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <A />
-        <B />
+        <B name = {'张三'} age = {18} />
         <C />
       </div>
     );

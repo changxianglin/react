@@ -18,3 +18,9 @@
 1. higherOrderComponent(WrappedComponent)
 1. @higherOrderComponent
 1. [装饰器语法安装配置](https://www.cnblogs.com/zhourongcode/p/9875286.html)
+
+代理方式的高阶组件
+1. 操纵 props
+1. 访问 ref
+1. 抽取状态
+1. 包装组件

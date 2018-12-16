@@ -11,4 +11,4 @@ class C extends Component {
     }
 }
 
-export default A(C)
+export default A('提示')(C)
