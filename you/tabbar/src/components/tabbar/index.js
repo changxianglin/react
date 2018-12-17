@@ -39,12 +39,13 @@ class Tabbar extends Component {
     }
 
     render() {
+        const url = window.location.href
         return (
             <div className = 'tabbar'>
                 <div className = "tabbar-content">
                 {
                     tarbarArr.map((v, i) => (
-                        <Link to={v.link} key = {i} className = {"tarbar-item" + (this.state.index === i ? ' active' : '')}>
+                        <Link to={v.link} key = {i} className = {"tarbar-item" + (url.indexOf(v.link) > -1 ? ' active' : '')}>
                             <div className = {'iconfont ' + v.img}></div>
                             <div>{v.text}</div>
                         </Link>
