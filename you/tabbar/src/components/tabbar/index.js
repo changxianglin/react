@@ -21,13 +21,25 @@ const tarbarArr = [
 ]
 
 class Tabbar extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            index: 0
+        }
+    }
+    itemChange = (i) => {
+        this.setState({
+            index: i
+        })
+    }
+
     render() {
         return (
             <div className = 'tabbar'>
                 <div className = "tabbar-content">
                 {
                     tarbarArr.map((v, i) => (
-                        <div key = {i} className = "tarbar-item">
+                        <div key = {i} className = {"tarbar-item" + (this.state.index === i ? ' active' : '')} onClick = {() => this.itemChange(i)}>
                             <div className = {'iconfont ' + v.img}></div>
                             <div>{v.text}</div>
                         </div>

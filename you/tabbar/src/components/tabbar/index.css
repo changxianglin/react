@@ -18,3 +18,7 @@
 .tarbar-item {
     flex: 1;
 }
+
+.active {
+    color: #f00;
+}
