@@ -23,7 +23,7 @@ class C extends Component {
         return (
             <div>
                  <input type = 'text' {...this.props} />
-                 <br />
+                 <br /> 
                 <img src = {require('../images/C.jpeg')} alt = "" />
             </div>
         )
