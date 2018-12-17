@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './index.css'
 
 const tarbarArr = [
     {
         img: 'icon-jialihome34',
-        text: '首页'
+        text: '首页',
+        link: '/home'
     },
     {
         img: 'icon-fenlei',
-        text: '分类'
+        text: '分类',
+        link: '/category'
     },
     {
         img: 'icon-gouwuche',
-        text: '购物车'
+        text: '购物车',
+        link: '/car'
     },
     {
         img: 'icon-yonghu-tianchong',
-        text: '我的'
+        text: '我的',
+        link: '/user'
     },
 ]
 
@@ -39,10 +44,10 @@ class Tabbar extends Component {
                 <div className = "tabbar-content">
                 {
                     tarbarArr.map((v, i) => (
-                        <div key = {i} className = {"tarbar-item" + (this.state.index === i ? ' active' : '')} onClick = {() => this.itemChange(i)}>
+                        <Link to={v.link} key = {i} className = {"tarbar-item" + (this.state.index === i ? ' active' : '')}>
                             <div className = {'iconfont ' + v.img}></div>
                             <div>{v.text}</div>
-                        </div>
+                        </Link>
                     ))
                 }
                 </div>
