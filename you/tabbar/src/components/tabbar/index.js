@@ -25,7 +25,7 @@ const tarbarArr = [
     },
 ]
 
-class Tabbar extends Component {
+const Tabbar = (WrappedComponent) => class Tabbar extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,20 +41,27 @@ class Tabbar extends Component {
     render() {
         const url = window.location.href
         return (
-            <div className = 'tabbar'>
-                <div className = "tabbar-content">
-                {
-                    tarbarArr.map((v, i) => (
-                        <Link to={v.link} key = {i} className = {"tarbar-item" + (url.indexOf(v.link) > -1 ? ' active' : '')}>
-                            <div className = {'iconfont ' + v.img}></div>
-                            <div>{v.text}</div>
-                        </Link>
-                    ))
-                }
+            <div className = "tabbar-container">
+            <div className = "tabbar-chidren">
+                <WrappedComponent />
+            </div>
+                <div className = 'tabbar'>
+                    <div className = "tabbar-content">
+                    {
+                        tarbarArr.map((v, i) => (
+                            <Link to={v.link} key = {i} className = {"tarbar-item" + (url.indexOf(v.link) > -1 ? ' active' : '')}>
+                                <div className = {'iconfont ' + v.img}></div>
+                                <div>{v.text}</div>
+                            </Link>
+                        ))
+                    }
+                    </div>
                 </div>
             </div>
         )
     }
 }
+
+
 
 export default Tabbar

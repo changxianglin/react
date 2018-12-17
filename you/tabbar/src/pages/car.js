@@ -6,10 +6,9 @@ class Car extends Component {
         return (
             <div>
                 <img className = "bg" src = {require('../static/images/car.png')} alt = "" />
-                <Tabbar />
             </div>
         )
     }
 }
 
-export default Car 
+export default Tabbar(Car) 

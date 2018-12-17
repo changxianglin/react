@@ -2,6 +2,10 @@
     font-size: 28px !important;
 }
 
+.tabbar-chidren {
+    margin-bottom: 50px;
+}
+
 .tabbar {
     background-color: #ffffff;
     height: 50px;

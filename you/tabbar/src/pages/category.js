@@ -6,10 +6,9 @@ class Category extends Component {
         return (
             <div>
                <img className = "bg" src = {require('../static/images/category.png')} alt = "" />
-                <Tabbar />
             </div>
         )
     }
 }
 
-export default Category 
+export default Tabbar(Category) 

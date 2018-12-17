@@ -6,10 +6,9 @@ class Home extends Component {
         return (
             <div>
                 <img className = "bg" src = {require('../static/images/home.png')} alt = "" />
-                <Tabbar />
             </div>
         )
     }
 }
 
-export default Home 
+export default Tabbar(Home) 

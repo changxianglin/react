@@ -6,10 +6,9 @@ class User extends Component {
         return (
             <div>
                <img className = "bg" src = {require('../static/images/user.png')} alt = "" />
-                <Tabbar />
             </div>
         )
     }
 }
 
-export default User 
+export default Tabbar(User) 
