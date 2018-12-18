@@ -4,6 +4,7 @@ import Home from './pages/home'
 import Category from './pages/category'
 import Car from './pages/car'
 import User from './pages/user'
+import Test from './pages/test'
 
 export default () => (
     <BrowserRouter>
@@ -12,6 +13,7 @@ export default () => (
             <Route path = '/category' component = {Category} />
             <Route path = '/car' component = {Car} />
             <Route path = '/user' component = {User} />
+            <Route path = "/testrefs" component = {Test} />
         </Switch>
     </BrowserRouter>
 )
