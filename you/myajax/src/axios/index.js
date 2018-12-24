@@ -12,9 +12,9 @@ export default class Axios {
                 baseURL: baseAPI,
                 timeout: 5000,
             }).then((response) => {
-                if(response.status == '200') {
+                if(response.status === 200) {
                     let res = response.data
-                    if(res.code == '0') {
+                    if(res.code === 0) {
                         resolve(res)
                     } else {
                         Modal.info({

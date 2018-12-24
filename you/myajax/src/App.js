@@ -8,7 +8,7 @@ class App extends Component {
     axios.ajax({
       url: '/testajax.json',
     }).then((res) => {
-      if(res.code == 0) {
+      if(res.code === 0) {
         console.log(res.data)
       }
     })
@@ -19,7 +19,7 @@ class App extends Component {
       url: '/testerror.json'
     }).then((res) => {
       console.log(res)
-      if(res.code == 0) {
+      if(res.code === 0) {
         console.log(res)
       }
     })
