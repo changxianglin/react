@@ -16,7 +16,10 @@ export default class Axios {
                     if(res.code == 0) {
                         resolve(res)
                     } else {
-                        Modal.info(res.msg)
+                        Modal.info({
+                            title: '提示',
+                            content: res.msg
+                        })
                     }
 
                 } else {
