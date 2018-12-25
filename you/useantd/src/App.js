@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Table } from 'antd'
+import { Table, Card } from 'antd'
 import axios from 'axios'
 
 class App extends Component {
@@ -16,6 +16,9 @@ class App extends Component {
   getTestData = () => {
     axios.get('https://www.easy-mock.com/mock/5c1e6795e8bfa547414a5341/ajax/table').then((res) => {
       console.log(res.data)
+      this.setState({
+        test: res.data.data.list
+      })
     })
   }
 
@@ -35,7 +38,9 @@ class App extends Component {
     }];
     return (
       <div className="App">
-        <Table dataSource = {this.state.test} columns = {columns} />
+      <Card>
+        <Table dataSource = {this.state.test} pagination = {false} bordered columns = {columns} />
+      </Card>
       </div>
     );
   }
