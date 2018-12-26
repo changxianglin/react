@@ -7,7 +7,7 @@ class Fourth extends React.Component {
     handleClick = () => {
         axios.get('https://www.easy-mock.com/mock/5c1e6795e8bfa547414a5341/ajax/find').then((res) => {
             console.log(res.data)
-            localStorage.setItem('fo', res.data.data.msg)
+            localStorage.setItem('fo', JSON.stringify(res.data.data.msg))
         })
     }
 
