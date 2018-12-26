@@ -5,6 +5,7 @@ import First from './pages/first'
 import Second from './pages/second'
 import Third from './pages/thrid'
 import Fourth from './pages/fourth'
+import Token from './pages/token'
 
 class ZRouter extends React.Component {
     render() {
@@ -17,6 +18,7 @@ class ZRouter extends React.Component {
                     <Route path = "/se"  component = {Second} />
                     <Route path = "/th"  component = {Third} />
                     <Route path = "/fo"  component = {Fourth} />
+                    <Route path = "/to"  component = {Token} />
                 </Switch>
             </BrowserRouter>
         )
