@@ -494,6 +494,21 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            // // add antd babel-plugin
+            // {
+            //   test: /\.(js|jsx|mjs)$/,
+            //   include: path.appSrc,
+            //   loader: require.resolve('babel-loader'),
+            //   options: {
+            //     plugins: [
+            //       ['import', [{
+            //         libraryName: 'antd',
+            //         style: true,
+            //       }]]
+            //     ],
+            //     compact: true,
+            //   }
+            // },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],
