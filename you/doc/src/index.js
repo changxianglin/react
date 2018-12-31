@@ -1,55 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// class App extends React.Component{
-//     handleClick = (e) => {
-//         e.preventDefault()
-//         console.log('The links ')
-//     }
-//     render() {
-//         return (
-//             <div>
-//             <a href="#" onClick={this.handleClick}>
-//                 Click me
-//             </a>
-//             </div>
-//         )
-//     }
-// }
+function UserGreeting(props) {
+    return <div>Welcome back!</div>
+}
 
-// ReactDOM.render(
-//     <App />,
-//     document.getElementById('root')
-// )
+function GuestGreeting(props) {
+    return <div>Plase sign up.</div>
+}
 
-
-class Toggle extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {isToggleOn: true}
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick() {
-        this.setState(
-            preState => ({
-                isToggleOn: !this.state.isToggleOn
-            })
-        )
-    }
-
-    render() {
-        return (
-            <div>
-                <button onClick = {this.handleClick}>
-                    {this.state.isToggleOn ? 'NO' : 'OFF'}
-                </button>
-            </div>
-        )
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn
+    if(isLoggedIn) {
+        return <GuestGreeting />
+    } else {
+        return <UserGreeting />
     }
 }
 
 ReactDOM.render(
-    <Toggle />,
+    <Greeting isLoggedIn = { true } />,
     document.getElementById('root')
 )
