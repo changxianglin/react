@@ -1,118 +1,40 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// 初级版本
-// const numbers = [1, 2, 3, 4, 5];
-// const listItems = numbers.map((number) =>
-//   <li>{number}</li>
-// );
+class NameFrom extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = { value: '' }
 
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
-// ReactDOM.render(
-//     <ul>{listItems}</ul>,
-//     document.getElementById('root')
-// ) 
+    handleChange(event) {
+        this.setState({
+            value: event.target.value
+        })
+    }
 
-// 升级版本
-// function NumberList(props) {
-//     const numbers = props.numbers
-//     const listItems = numbers.map((number) => 
-//         <li>{number}</li>
-//     )
-//     return (
-//         <ul>{listItems}</ul>
-//     )
-// }
+    handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value)
+        event.preventDefault()
+    }
 
-// const numbers = [1, 2, 3, 4, 5]
-// ReactDOM.render(
-//     <NumberList numbers = {numbers} />,
-//     document.getElementById('root')
-// )
-
-// 带 key 版本
-// function NumberList(props) {
-//     const numbers = props.numbers
-//     const listItems = numbers.map((number) => 
-//         <li key = {number.toString()}>
-//             {number}
-//         </li>
-//     )
-
-//     return (
-//         <ul>{ listItems }</ul>
-//     )
-// }
-
-// const numbers = [1, 2, 3, 4, 5]
-// ReactDOM.render(
-//     <NumberList numbers = {numbers} />,
-//     document.getElementById('root')
-// )
-
-// 带 Key 升级版本
-// function ListItem(props) {
-//     return <li>{props.value}</li>;
-//   }
-
-// function NumberList(props) {
-//     const numbers = props.numbers
-//     const listItems = numbers.map((number) => 
-//         <ListItem key = {number.toString()}
-//                   value = {number} />
-//     )
-
-//     return (
-//         <ul>
-//             { listItems }
-//         </ul>
-//     )
-// }
-
-
-// const numbers = [1, 2, 3, 4, 5]
-// ReactDOM.render(
-//     <NumberList numbers = {numbers} />,
-//     document.getElementById('root')
-// )
-
-// key 值唯一性
-function Blog(props) {
-    const sidebar = (
-        <ul>
-            {
-                props.posts.map((post) => 
-                    <li key = {post.id}>
-                        { post.title }
-                    </li>
-                )
-            }
-        </ul>
-    )
-
-    const content = props.posts.map((post) => 
-            <div key = {post.id}>
-                <h3>{post.id}</h3>
-                <p>{post.content}</p>
-            </div>
-    )
-    
-    return (
-        <div>
-            {sidebar}
-            <hr />
-            {content}
-        </div>
-    )
+    render() {
+        return (
+            <form onSubmit = {this.handleSubmit}>
+                <label>
+                    Name:
+                    <input type = 'text' value = {this.state.value} onChange = {this.handleChange} />
+                </label>
+                <input type = 'submit' value = 'Submit' />
+            </form>
+        )
+    }
 }
 
-const posts = [
-    {id: 1, title: 'Hello, world!', content: 'Welcom to learning React'},
-    {id: 2, title: 'Installation', content: 'You can install React from npm.'}
-]
-
 ReactDOM.render(
-    <Blog posts = {posts} />,
+    <NameFrom />,
     document.getElementById('root')
 )
-
