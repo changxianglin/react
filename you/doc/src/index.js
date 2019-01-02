@@ -1,41 +1,38 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-function BoilingVerdict(props) {
-    if(props.celius >= 100) {
-        return <li>水会开</li>
-    } else {
-        return <li>水不会开</li>
-    }
-}
-
-class Calculator extends React.Component {
+class UserGist extends React.Component {
     constructor(props) {
-      super(props);
-      this.handleChange = this.handleChange.bind(this);
-      this.state = {temperature: ''};
+        super(props);
+        this.state = {username: '', lastGistUrl: ''};
     }
-  
-    handleChange(e) {
-      this.setState({temperature: e.target.value});
+   
+   
+    componentDidMount() {
+      this.serverRequest = $.get(this.props.source, function (result) {
+        var lastGist = result[0];
+        this.setState({
+          username: lastGist.owner.login,
+          lastGistUrl: lastGist.html_url
+        });
+      }.bind(this));
     }
-  
+   
+    componentWillUnmount() {
+      this.serverRequest.abort();
+    }
+   
     render() {
-      const temperature = this.state.temperature;
       return (
-        <fieldset>
-          <legend>输入一个摄氏温度</legend>
-          <input
-            value={temperature}
-            onChange={this.handleChange} />
-          <BoilingVerdict
-            celsius={parseFloat(temperature)} />
-        </fieldset>
+        <div>
+          {this.state.username} 用户最新的 Gist 共享地址：
+          <a href={this.state.lastGistUrl}>{this.state.lastGistUrl}</a>
+        </div>
       );
     }
   }
-
+   
   ReactDOM.render(
-      <Calculator />,
-      document.getElementById('root')
-  )
+    <UserGist source="https://api.github.com/users/octocat/gists" />,
+    document.getElementById('example')
+  );
