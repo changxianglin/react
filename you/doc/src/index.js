@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 class UserGist extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {username: '', lastGistUrl: ''};
@@ -9,18 +11,27 @@ class UserGist extends React.Component {
    
    
     componentDidMount() {
-      this.serverRequest = $.get(this.props.source, function (result) {
-        var lastGist = result[0];
-        this.setState({
-          username: lastGist.owner.login,
-          lastGistUrl: lastGist.html_url
-        });
-      }.bind(this));
+    //   this.serverRequest = $.get(this.props.source, function (result) {
+    //     var lastGist = result[0];
+    //     this.setState({
+    //       username: lastGist.owner.login,
+    //       lastGistUrl: lastGist.html_url
+    //     });
+    //   }.bind(this))
+        const baseUrl = "https://api.github.com/users/octocat/gists"
+        axios.get(baseUrl).then((result) => {
+            console.log(result)
+            var lastGist = result.data[0];
+            this.setState({
+                username: lastGist.owner.login,
+                lastGistUrl: lastGist.html_url
+            });
+        })
     }
    
-    componentWillUnmount() {
-      this.serverRequest.abort();
-    }
+    // componentWillUnmount() {
+    //   this.serverRequest.abort();
+    // }
    
     render() {
       return (
@@ -32,7 +43,7 @@ class UserGist extends React.Component {
     }
   }
    
-  ReactDOM.render(
-    <UserGist source="https://api.github.com/users/octocat/gists" />,
-    document.getElementById('example')
-  );
+ReactDOM.render(
+<UserGist />,
+document.getElementById('root')
+)
