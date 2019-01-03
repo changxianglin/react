@@ -38,10 +38,13 @@
           </div>
           <script type="text/javascript">
             var hammerTest = new Hammer(document.getElementById('test'));
+            hammerTest.get('pinch').set({
+                enable: true
+            });
             hammerTest.on('pan panmove swipe swipeup press pressup', function(ev) {
                 console.log(ev.type);
             });
-            hammerTest.on('pinch pinchin pinchout hammer.input', function(ev) {
+            hammerTest.on('pinchin', function(ev) {
                 alert(ev);
             });
           </script>

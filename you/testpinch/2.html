@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <style>
+      .container {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+      .wrapper {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        </div>
+    </div>
+    <script type="text/javascript">
+      var el = document.querySelector('.wrapper')
+      el.addEventListener('click', function() {
+        el.style.transform = 'scale(10) '
+      })
+    </script>
+  </body>
+</html>
