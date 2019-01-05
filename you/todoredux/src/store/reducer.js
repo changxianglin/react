@@ -1,6 +1,6 @@
 const defaultState = {
-    inputValue: '123',
-    list: [1, 2]
+    inputValue: '',
+    list: []
 }
 
 export default (state = defaultState, action) => {
@@ -16,6 +16,11 @@ export default (state = defaultState, action) => {
         newState.inputValue = ''
         return newState
     }
-    console.log(state, action)
+
+    if(action.type === 'delete_todo_item') {
+        const newState = JSON.parse(JSON.stringify(state))
+        newState.list.splice(action.index, 1)
+        return newState
+    }
     return state
 }
