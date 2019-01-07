@@ -10,7 +10,7 @@ class Header extends Component {
         return (
             <HeaderWrapper>
                 <Logo />
-                <Nav />
+                <Nav></Nav>
             </HeaderWrapper>
         )
     }
