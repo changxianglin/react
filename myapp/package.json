@@ -9,6 +9,7 @@
   "author": "xianglin <281532612@qq.com> (zhourong.clube)",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "expres": "0.0.5",
     "express": "^4.16.4"
   }
