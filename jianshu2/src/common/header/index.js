@@ -51,7 +51,7 @@ const Header = (props) => {
 
 const  mapStateToPorps = (state) => {
     return {
-        focused: state.focused
+        focused: state.header.focused
     }
 }
 
