@@ -53,7 +53,7 @@ const Header = (props) => {
 
 const  mapStateToPorps = (state) => {
     return {
-        focused: state.header.get('focused')
+        focused: state.getIn(['header', 'focused'])
     }
 }
 
