@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { 
     HeaderWrapper,
@@ -11,19 +12,9 @@ import {
     SearchWrapper,
  } from './style.js'
 
-class Header extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            focused: false,
-        }
-
-        this.handleInputFocus = this.handleInputFocus.bind(this)
-        this.handleInputBlur = this.handleInputBlur.bind(this)
-    }
-    render() {
-        return (
-            <HeaderWrapper>
+const Header = (props) => {
+    return (
+        <HeaderWrapper>
                 <Logo />
                 <Nav>
                     <NavItem className = 'left active'>首页</NavItem>
@@ -34,17 +25,17 @@ class Header extends Component {
                     </NavItem>
                     <SearchWrapper>
                         <CSSTransition
-                            in = {this.state.focused}
+                            in = {props.focused}
                             timeout = {200}
                             classNames = "slide"
                         >
                             <NavSearch
-                                className = {this.state.focused ? 'focused' : ''}
-                                onFocus = {this.handleInputFocus}
-                                onBlur = {this.handleInputBlur}
+                                className = {props.focused ? 'focused' : ''}
+                                onFocus = {props.handleInputFocus}
+                                onBlur = {props.handleInputBlur}
                             ></NavSearch>
                         </CSSTransition>
-                        <i className = {this.state.focused ? 'focused iconfont' : 'iconfont'}>&#xe62b;</i>
+                        <i className = {props.focused ? 'focused iconfont' : 'iconfont'}>&#xe62b;</i>
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -55,20 +46,30 @@ class Header extends Component {
                     <Button className = "reg">注册</Button>
                 </Addition>
             </HeaderWrapper>
-        )
-    }
+    )
+}
 
-    handleInputFocus() {
-        this.setState({
-            focused: true
-        })
-    }
-
-    handleInputBlur() {
-        this.setState({
-            focused: false
-        })
+const  mapStateToPorps = (state) => {
+    return {
+        focused: state.focused
     }
 }
 
-export default Header
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleInputFocus() {
+            const action = {
+                type: 'search_fous',
+            }
+            dispatch(action)
+        },
+        handleInputBlur() {
+            const action = {
+                type: 'search_blur'
+            }
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(mapStateToPorps, mapDispatchToProps)(Header)
