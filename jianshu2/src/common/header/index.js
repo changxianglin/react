@@ -59,7 +59,7 @@ import {
     }
 
      render() {
-        const { focused, handleInputFocus, handleInputBlur, } = this.props
+        const { focused, handleInputFocus, handleInputBlur, list } = this.props
         return (
             <HeaderWrapper>
                     <Logo />
@@ -78,7 +78,7 @@ import {
                             >
                                 <NavSearch
                                     className = {focused ? 'focused' : ''}
-                                    onFocus = {handleInputFocus}
+                                    onFocus = {() => handleInputFocus(list)}
                                     onBlur = {handleInputBlur}
                                 ></NavSearch>
                             </CSSTransition>
@@ -112,8 +112,8 @@ const  mapStateToPorps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleInputFocus() {
-            dispatch(actionCreators.getList())
+        handleInputFocus(list) {
+            (list.size === 0) && dispatch(actionCreators.getList())
             dispatch(actionCreators.searchFocus())
         },
         handleInputBlur() {
@@ -132,7 +132,7 @@ const mapDispatchToProps = (dispatch) => {
             } else {
                 originAngle = 0
             }
-            
+
             spin.style.transform = 'rotate('+(originAngle + 360) +'deg)'
 
             if(page < totalPage) {
