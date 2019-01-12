@@ -27,7 +27,7 @@ class Topic extends Component {
 }
 
 const mapStateToPorps = (state) => ({
-    list: state.get('home').get('topicList')
+    list: state.getIn(['home', 'topicList'])
 })
 
 export default connect(mapStateToPorps, null)(Topic)
