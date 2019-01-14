@@ -18,6 +18,7 @@ import {
     SearchInfoItem,
     SearchWrapper,
  } from './style.js'
+ import { Link } from 'react-router-dom'
 
  class Header extends Component {
 
@@ -62,7 +63,9 @@ import {
         const { focused, handleInputFocus, handleInputBlur, list } = this.props
         return (
             <HeaderWrapper>
+                <Link to = '/'>
                     <Logo />
+                </Link>    
                     <Nav>
                         <NavItem className = 'left active'>首页</NavItem>
                         <NavItem className = 'left'>下载APP</NavItem>
