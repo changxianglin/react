@@ -32,7 +32,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatch = (dispatch) => ({
     getDetail() {
-
+        dispatch(actionCreators.getDetail())
     }
 })
 
