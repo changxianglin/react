@@ -57,4 +57,8 @@ class Postform extends Component {
     }
 }
 
+Postform.prototype = {
+    createPost: PropTypes.func.isRequired,
+}
+
 export default connect(null, { createPost })(Postform)
