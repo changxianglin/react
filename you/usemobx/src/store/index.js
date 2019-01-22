@@ -5,3 +5,7 @@ class store {
 }
 
 export default store = new store()
+
+// react-app-rewired
+// react-app-rewire-mobx
+// babel-plugin-styled-components
