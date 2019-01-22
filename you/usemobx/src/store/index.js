@@ -1,10 +1,14 @@
-import { observable } from 'mobx'
+import homeStore from '../pages/home/store'
 
-class store {
-    @observable title = '开始使用 mobx'
+class rootStore {
+    constructor() {
+        this.homeStore = new homeStore(this)
+    }
 }
 
-export default store = new store()
+const store = new rootStore()
+
+export default store
 
 // react-app-rewired
 // react-app-rewire-mobx
