@@ -1,0 +1,35 @@
+.wrapper {
+    position: relative;
+    width: 500px;
+    height: 280px;
+    margin: 0 auto;
+    border: 1px solid #f00;
+    margin-top: 20px;
+}
+
+.left {
+    position: absolute;
+    text-align: left;
+    width: 200px;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    text-align: right;
+    width: 170px;
+}
+
+.imgWrapper img{
+    width: 100%;
+    height: 270px;
+}
+
+.imgSite {
+    width: 100%;
+    height: 5rem;
+}
+
+.imgToggle {
+    display: none;
+}
