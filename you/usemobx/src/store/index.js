@@ -1,8 +1,10 @@
 import homeStore from '../pages/home/store'
+import postStore from '../pages/post/store'
 
 class rootStore {
     constructor() {
         this.homeStore = new homeStore(this)
+        this.postStore = new postStore(this)
     }
 }
 
