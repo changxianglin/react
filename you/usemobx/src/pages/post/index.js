@@ -15,8 +15,22 @@ class Post extends Component {
                     postStore.content.map((item) => {
                         return (
                             <div key = {item.id}>
-                                <h3>{item.title}</h3>
-                                <p>{item.desc}</p>
+                                <div>
+                                    <div>{item.title}</div>
+                                    <div>{item.desc}</div>
+                                    <div>{item.content}</div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src = {item.icon} alt = '' />
+                                    </div>
+                                    <div>
+                                        <div>{item.instructor}</div>
+                                    </div>
+                                </div>    
+                                <div>
+                                    <img src = {item.imgUrl} alt = '' />
+                                </div>
                             </div>
                         )
                     })
