@@ -1,4 +1,10 @@
+.className {
+    text-align: left;
+    background-color: #00f;
+}
+
 .title {
+    composes: className;
     color:  #f00;
     font-size: 16px;
 }
@@ -6,8 +12,4 @@
 .content {
     color: #0f0;
     font-size: 14px;
-}
-
-.common {
-    text-align: center;
 }
