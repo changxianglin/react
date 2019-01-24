@@ -1,6 +1,7 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 class tablesStore {
+    @observable flag = true
     @observable dataSource = [{
         key: '1',
         name: '胡彦斌',
@@ -85,6 +86,24 @@ class tablesStore {
         dataIndex: 'address',
         key: 'address',
       }];
+
+      @observable columns3 = [{
+        title: '测试',
+        dataIndex: 'name',
+        key: 'name',
+      }, {
+        title: '测试',
+        dataIndex: 'age',
+        key: 'age',
+      }, {
+        title: '测试',
+        dataIndex: 'address',
+        key: 'address',
+      }];
+
+      @action handleToggleTable = () => {
+          this.flag = !this.flag
+      }
 }
 
 export default tablesStore

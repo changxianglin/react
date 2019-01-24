@@ -1,5 +1,9 @@
 @import '~antd/dist/antd.css';
 
+.tableShow {
+  display: block !important;
+}
+
 .App {
   text-align: center;
 }

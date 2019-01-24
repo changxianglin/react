@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer} from 'mobx-react'
+import style from './index.module.css'
 import { Table, Button } from 'antd'
 
 @inject('store')
@@ -8,6 +9,7 @@ class Tables extends Component {
 
     handleToggle = () => {
         let doms = document.querySelector('#testTab')
+        doms.classList.toggle('tableShow')
     }
 
     render() {
@@ -30,8 +32,13 @@ class Tables extends Component {
                  />
                  <hr />
                  <Button onClick = {this.handleToggle}>开个一个表格</Button>
-                 <div id = 'testTab'>
-
+                 <div id = 'testTab' className = {style.tables}>
+                    <Table 
+                    dataSource={tablesStore.dataSource}
+                    columns={tablesStore.columns3}
+                    pagination = {false}
+                    scroll = {{x: 20, y: 200}}
+                    /> 
                  </div>
             </div>
         )
