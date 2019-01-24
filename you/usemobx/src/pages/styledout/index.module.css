@@ -1,15 +1,28 @@
+/* @value colors: "./colors.css";
+@value blue, red, green, from colors; */
+
+.common {
+    margin-top: 10rem;
+    border: 1px solid #f0edf0;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 1rem;
+}
+
 .className {
     text-align: left;
-    background-color: #00f;
 }
 
 .title {
     composes: className;
+    composes: common;
     color:  #f00;
     font-size: 16px;
 }
 
 .content {
+    composes: className;
+    composes: common;
     color: #0f0;
     font-size: 14px;
 }
