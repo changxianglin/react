@@ -4,6 +4,7 @@ import './App.css';
 import { Home } from './pages/home'
 import { Post } from './pages/post'
 import { StyledOut } from './pages/styledout'
+import { Tables } from './pages/table'
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
             <Route path = '/' exact component = {Home} />
             <Route path = '/post' component = {Post} />
             <Route path = '/style' component = {StyledOut} />
+            <Route path = '/tables' component = {Tables} />
         </div>
       </BrowserRouter>
     );
