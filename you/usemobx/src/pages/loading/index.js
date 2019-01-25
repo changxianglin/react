@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react'
 import { Button } from 'antd'
-import axios from '../../utils/axios'
 
+@inject('store')
+@observer
 class Loading extends Component {
-    handleRequest = () => {
-        axios.ajax({
-            url: 'https://www.easy-mock.com/mock/5c1e6795e8bfa547414a5341/ajax/loading',
-            isShowLoading: true,
-        }).then(res => console.log(res.data))
-    }
     render() {
+        const { loadingStore } = this.props.store
         return (
             <div>
-                <h1>测试加载</h1>
-                <Button onClick = {this.handleRequest}>请求数据</Button>
+                <h1>{loadingStore.title}</h1>
+                <Button onClick = {loadingStore.handleRequest}>{loadingStore.content}</Button>
             </div>
         )
     }
