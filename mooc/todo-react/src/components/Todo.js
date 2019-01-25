@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 
 export default class Todo extends Component {
   render() {
-    const { completed, text } = this.props  
+    const { completed, text, onClick } = this.props  
     return (
-      <li style = {{
+      <li 
+      onClick = {onClick}
+      style = {{
           textDecoration: completed ? 'line-through' : 'none'
       }}>
         {text}
