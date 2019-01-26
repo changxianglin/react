@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Todo extends Component {
   render() {
-    const { completed, text, onClick } = this.props  
+    const { completed, text, onClick } = this.props;
     return (
-      <li 
-      onClick = {onClick}
-      style = {{
-          textDecoration: completed ? 'line-through' : 'none'
-      }}>
+      <li
+        onClick={onClick}
+        style={{
+          textDecoration: completed ? "line-through" : "none"
+        }}
+      >
         {text}
       </li>
-    )
+    );
   }
 }
