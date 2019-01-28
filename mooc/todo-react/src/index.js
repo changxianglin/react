@@ -6,11 +6,13 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers'
 import App from './components/App';
 
+import loggerMiddleware from './middlewares/logger'
+
 const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, 
-    composeEnhancers(applyMiddleware(thunkMiddleware)))
+    composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware)))
 
 ReactDOM.render(
 <Provider store = {store}>
