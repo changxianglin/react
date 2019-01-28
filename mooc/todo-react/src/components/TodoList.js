@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 
-export default class TodoList extends Component {
+class TodoList extends Component {
+  componentDidMount() {
+    this.props.fetchTodos()
+  }
+
   render() {
     const { todos, toggleTodo } = this.props;
     return (
@@ -21,3 +25,5 @@ export default class TodoList extends Component {
     );
   }
 }
+
+export default TodoList
