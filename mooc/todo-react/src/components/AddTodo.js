@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 
 export default class AddTodo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        text: '',
-    }
-  }
-
   render() {
     return (
       <div>
         <input 
-        value = {this.state.text}
+        value = {this.props.text}
         onChange = {this.handleChange}
          />
         <button onClick = {this.handleClick}>Add</button>
@@ -21,12 +14,10 @@ export default class AddTodo extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-        text: e.target.value
-    })
+    this.props.setTodoText(e.target.value)
   }
 
   handleClick = () => {
-    this.props.addTodo(this.state.text)
+    this.props.addTodo(this.props.text)
   }
 }

@@ -1,13 +1,29 @@
 import { connect } from "react-redux";
-import Footer from "../components/Footer";
-import { setFilter } from "../action";
+import TodoList from "../components/TodoList";
+import { toggleTodo } from "../action";
+
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case "all":
+      return todos;
+    case "completed":
+      return todos.filter(t => t.completed);
+    case "active":
+      return todos.filter(t => !t.completed);
+    default:
+      return new Error("Unkonw filter: " + filter);
+  }
+};
 
 const mapStateToProps = state => ({
-    filter: state.filter
-})
+  todos: getVisibleTodos(state.todos, state.filter)
+});
 
 const mapDispatchToProps = dispatch => ({
-    setFilter: filter => dispatch(setFilter(filter))
-})
+  toggleTodo: id => dispatch(toggleTodo(id))
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
