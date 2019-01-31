@@ -1,3 +1,4 @@
+import { get } from '../../utils/request'
 
 //经过中间件处理的 action 所具有的标识
 export const FETCH_DATA = 'FETCH DATA'
@@ -22,16 +23,49 @@ export default store => next => action => {
         throw new Error('actions type 必须为字符串类型')
     }
 
+    const actionWitdh = data => {
+        const finalAction = {...action, ...data}
+        delete finalAction[FETCH_DATA]
+        return finalAction
+    }
+
     cosnt [requestType, successType, failureType] = types
-    next({type: requestType})
+    next(actionWitdh({type: requestType}))
     return fetechData(endpoint, schema).then(
-        response => next({
+        response => next(actionWitdh({
             type: successType,
             response
-        }),
-        error => next({
+        })),
+        error => next(actionWitdh({
             type: failureType,
             error: error.message || '获取数据失败'
-        })
+        }))
     )
+}
+
+// 执行网络请求
+const fetechData = (endpoint, schema) => {
+    return get(endpoint).then(data => {
+        return normalizeData(data, schema)
+    })
+}
+
+//根据 schema, 将获取的数据扁平化处理
+const normalizeData = (data, schema) => {
+    const {id, name} = schema
+    let kvOjb = {}
+    let ids = []
+    if(Array.isArray(data)) {
+        data.forEach(item => {
+          kvOjb[item[id]] =  item
+          ids.push(item[id])
+        })
+    } else {
+        kvOjb[data[id]] = data
+        ids.push(data[id])
+    }
+    return {
+        [name]: kvOjb,
+        ids
+    }
 }
