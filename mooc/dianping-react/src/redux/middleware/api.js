@@ -29,7 +29,7 @@ export default store => next => action => {
         return finalAction
     }
 
-    cosnt [requestType, successType, failureType] = types
+    const [requestType, successType, failureType] = types
     next(actionWitdh({type: requestType}))
     return fetechData(endpoint, schema).then(
         response => next(actionWitdh({
