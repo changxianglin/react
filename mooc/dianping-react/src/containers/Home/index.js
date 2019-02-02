@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Category from './components/Category'
 import Headline from './components/Headline'
 import Discount from './components/Discount'
+import LikeList from './components/LikeList'
 
 export default class Home extends Component {
   render() {
@@ -10,6 +11,7 @@ export default class Home extends Component {
         <Category />
         <Headline />
         <Discount />
+        <LikeList />
       </div>
     )
   }
