@@ -137,7 +137,7 @@ export default class Category extends Component {
   render() {
       const settings = {
           dots: true,
-          arrow: false,
+          arrows: false,
           slidesToShow: 1,
           swiperToslide: true,
           autoplay: true
