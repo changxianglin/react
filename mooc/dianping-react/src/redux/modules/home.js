@@ -48,8 +48,13 @@ export const actions = {
             return dispatch(fetchLikes(endpoint))
         }
     },
+    // 加载特惠商品
     loadDiscount: () => {
         return (dispatch, getState) => {
+            const { ids } = getState().home.discounts()
+            if(ids.length > 0) {
+                return null
+            } 
             const endpoint = url.getPorductList(params.PATH_DISCOUNTS, 0, params.PAGE_SIZE_DISCOUNTS)
             return dispatch(fetchDiscounts(endpoint))
         }

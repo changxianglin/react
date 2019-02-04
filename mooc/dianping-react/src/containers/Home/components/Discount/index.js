@@ -3,7 +3,7 @@ import './style.css'
 
 export default class Discount extends Component {
   render() {
-      const data = this.props
+    const { data } = this.props
     return (
       <div className = 'discount'>
         <a className = 'discount__header'>
