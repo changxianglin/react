@@ -1,4 +1,5 @@
-import { get } from '../../utils/request'
+// import { get } from '../../utils/request'
+import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api'
 import { schema } from './entities/products'
@@ -79,17 +80,57 @@ const fetchDiscounts = (endpoint) => ({
     }
 })
 
-const reducer = (state = {}, action)  => {
+// 猜你喜欢 reducers
+const likes = (state = initialState.likes, action) => {
     switch(action.type) {
-        case types.fetchLikesRequest:
-        // todo
-        case types.fetchLikesSuccess: 
-        // todo
-        case types.fetchLikesFailure:
-        // todo
+        case types.FETCH_LIKES_REQUEST:
+        return {...state, isFetching: true}
+        case types.FETCH_LIKES_SUCCESS:
+        return {...state, isFetching: false, pageCount: state.pageCount + 1, ids: state.ids.concat(action.response.ids)}
+        case types.FETCH_LIKES_FAILURE:
+        return {...state, isFetching: false}
         default:
-            return state
+        return state
     }
 }
 
+// 特惠商品 reducers
+const discounts = (state = initialState.discounts, action) => {
+    switch(action.type) {
+        case types.FETCH_DISCOUNTS_REQUEST:
+        return {...state, isFetching: true}
+        case types.FETCH_DISCOUNTS_SUCCESS:
+        return {...state, isFetching: false, ids: state.ids.concat(action.response.ids)}
+        case types.FETCH_DISCOUNTS_FAILURE:
+        return {...state, isFetching: false}
+        default:
+        return state
+    }
+}
+
+const reducer = combineReducers({
+    discounts,
+    likes
+})
+
 export default reducer
+
+// selectors
+// 获取猜你喜欢 state
+export const getLikes = state => {
+    return state.home.likes.ids.map(id => {
+        return state.entities.products[id]
+    })
+}
+
+// 获取特惠商品 state
+export const getDiscounts = state => {
+    return state.home.discounts.ids.map(id => {
+        return state.entities.products[id]
+    })
+}
+
+//猜你喜欢当前分页码
+export const getPageCountOfLikes = state => {
+    return state.home.likes.pageCount
+}
