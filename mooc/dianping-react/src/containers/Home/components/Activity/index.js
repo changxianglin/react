@@ -17,6 +17,7 @@ class Activity extends Component {
             <img
               className="activity__pic"
               src="https://op.meituan.net/oppkit_pic/20160310032241-1e027deb-2/a3a31fff2e047a907a53d6488877f7fe.png"
+              alt = ''
             />
           </a>
         </div>
@@ -32,6 +33,7 @@ class Activity extends Component {
             <img
               className="activity__pic"
               src="https://op.meituan.net/oppkit_pic/20160310032241-1e027deb-2/a9b8c52c341892600ff7260c89025a59.png"
+              alt = ''
             />
           </a>
         </div>
