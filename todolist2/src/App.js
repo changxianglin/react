@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './style.css'
 
+import Req from './req'
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -33,6 +35,7 @@ class App extends Component {
           }
         </TransitionGroup>
         <button onClick = {this.handleAddItem}>Toggle</button>
+        <Req />
       </Fragment>
     )
   }
