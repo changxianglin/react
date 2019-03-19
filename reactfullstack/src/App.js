@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'antd-mobile'
 
 class App extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class App extends React.Component {
         <div>Start learn {fream}</div>
         <Func name = 'zhangsan'></Func>
         <hr />
+        <Button type = "primary">Antd-Mobile</Button>
         <Test></Test>
       </div>
     )
