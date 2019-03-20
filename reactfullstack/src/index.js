@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import App from './App'
 
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -11,9 +12,8 @@ const store = createStore(counter, compose(
   window.devToolsExtension ? window.devToolsExtension() : () => {}
   ))
 
-function render() {
-  ReactDOM.render(<App store = { store } addGUN = { addGUN } removeGUN = { removeGUN } addGunAsync = { addGunAsync } />, document.getElementById('root'))
-}
-render()
-
-store.subscribe(render)
+ReactDOM.render(
+  (<Provider store = { store } >
+    <App />
+  </Provider>),
+document.getElementById('root'))
