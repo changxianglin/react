@@ -1,10 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { 
+  BrowserRouter, 
+  Route, 
+  Link, 
+  Redirect,
+  Switch 
+ } from 'react-router-dom'
 import App from './App'
 import Wuying from './Wuying'
 import Shuying from './Shuying'
+import Test from './Test'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { counter } from './index.redux'
@@ -29,9 +36,12 @@ ReactDOM.render(
           <Link to = '/shuying'>蜀营</Link>
         </li>
       </ul>
-      <Route path = '/' exact component = {App}></Route>
-      <Route path = '/wuying' component = {Wuying}></Route>
-      <Route path = '/shuying' component = {Shuying}></Route>
+      <Switch>
+        <Route path = '/' exact component = {App}></Route>
+        <Route path = '/wuying' component = {Wuying}></Route>
+        <Route path = '/shuying' component = {Shuying}></Route>
+        <Route path = '/:location' component = {Test}></Route>
+      </Switch>
     </BrowserRouter>
   </Provider>),
 document.getElementById('root'))
