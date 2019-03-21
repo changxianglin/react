@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from './Auth.redux'
 
 import App from './App'
 import Wuying from './Wuying'
 import Shuying from './Shuying'
 
-export default class Dashboard extends Component {
+@connect(
+  state => state.auth,
+  { logout }
+)
+class Dashboard extends Component {
   render() {
-    return (
+    console.log(this.props)
+    const redirectToLogin = <Redirect to = '/login'></Redirect>
+    const app = (
       <div>
+        <h1>三国</h1>
+        { this.props.isAuth ? <button onClick = {this.props.logout}>注销</button> : null}
         <ul>
         <li>
           <Link to = '/dashboard/'>曹营</Link>
@@ -25,5 +35,8 @@ export default class Dashboard extends Component {
       <Route path = "/dashboard/shuying" component = {Shuying}></Route>
       </div>
     )
+    return this.props.isAuth ? app : redirectToLogin
   }
 }
+
+export default Dashboard

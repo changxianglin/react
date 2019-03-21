@@ -16,14 +16,14 @@ import Auth from './Auth'
 import Dashboard from './Dashboard'
 
 import { createStore, applyMiddleware, compose } from 'redux'
-import { counter } from './index.redux'
+// import { counter } from './index.redux'
+import reducers from './reducer'
 import thunk from 'redux-thunk';
 
-const store = createStore(counter, compose(
+const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : () => {}
   ))
-
 ReactDOM.render(
   (<Provider store = { store } >
     <BrowserRouter>

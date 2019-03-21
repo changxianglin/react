@@ -4,11 +4,10 @@ import { addGUN, removeGUN, addGunAsync } from './index.redux'
 
 @connect(
   state => ({
-    num: state
+    num: state.counter
   }),
   { addGUN, removeGUN, addGUN }
   )
-  
 class App  extends React.Component {
   render() {
     const num = this.props.num
