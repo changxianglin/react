@@ -4,14 +4,9 @@ import { Provider } from 'react-redux'
 import { 
   BrowserRouter, 
   Route, 
-  Link, 
   Redirect,
   Switch 
  } from 'react-router-dom'
-import App from './App'
-import Wuying from './Wuying'
-import Shuying from './Shuying'
-import Test from './Test'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 
@@ -22,7 +17,7 @@ import thunk from 'redux-thunk';
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : () => {}
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ))
 ReactDOM.render(
   (<Provider store = { store } >

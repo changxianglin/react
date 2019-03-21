@@ -6,7 +6,7 @@ import { addGUN, removeGUN, addGunAsync } from './index.redux'
   state => ({
     num: state.counter
   }),
-  { addGUN, removeGUN, addGUN }
+  { addGUN, removeGUN, addGunAsync }
   )
 class App  extends React.Component {
   render() {

@@ -13,7 +13,8 @@ import Shuying from './Shuying'
 )
 class Dashboard extends Component {
   render() {
-    console.log(this.props)
+    const match = this.props.match
+    console.log(match)
     const redirectToLogin = <Redirect to = '/login'></Redirect>
     const app = (
       <div>
@@ -21,18 +22,18 @@ class Dashboard extends Component {
         { this.props.isAuth ? <button onClick = {this.props.logout}>注销</button> : null}
         <ul>
         <li>
-          <Link to = '/dashboard/'>曹营</Link>
+          <Link to = {`${match.url}`}>曹营</Link>
         </li>
         <li>
-          <Link to =  '/dashboard/wuying'>吴营</Link>
+          <Link to =  {`${match.url}/wuying`}>吴营</Link>
         </li>
         <li>
-          <Link to = '/dashboard/shuying'>蜀营</Link>
+          <Link to = {`${match.url}/shuying`}>蜀营</Link>
         </li>
       </ul>
-      <Route path = "/dashboard/" exact component = {App}></Route>
-      <Route path = "/dashboard/wuying" component = {Wuying}></Route>
-      <Route path = "/dashboard/shuying" component = {Shuying}></Route>
+      <Route path = {`${match.url}`} exact component = {App}></Route>
+      <Route path = {`${match.url}/wuying`} component = {Wuying}></Route>
+      <Route path = {`${match.url}/shuying`} component = {Shuying}></Route>
       </div>
     )
     return this.props.isAuth ? app : redirectToLogin
