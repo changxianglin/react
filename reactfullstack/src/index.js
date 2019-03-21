@@ -12,6 +12,8 @@ import App from './App'
 import Wuying from './Wuying'
 import Shuying from './Shuying'
 import Test from './Test'
+import Auth from './Auth'
+import Dashboard from './Dashboard'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { counter } from './index.redux'
@@ -25,22 +27,10 @@ const store = createStore(counter, compose(
 ReactDOM.render(
   (<Provider store = { store } >
     <BrowserRouter>
-      <ul>
-        <li>
-          <Link to = '/'>曹营</Link>
-        </li>
-        <li>
-          <Link to =  '/wuying'>吴营</Link>
-        </li>
-        <li>
-          <Link to = '/shuying'>蜀营</Link>
-        </li>
-      </ul>
-      <Switch>
-        <Route path = '/' exact component = {App}></Route>
-        <Route path = '/wuying' component = {Wuying}></Route>
-        <Route path = '/shuying' component = {Shuying}></Route>
-        <Route path = '/:location' component = {Test}></Route>
+    <Switch>
+        <Route path = '/login' exact component = {Auth}></Route>
+        <Route path = '/dashboard' component = {Dashboard}></Route>
+        <Redirect to = '/'></Redirect>
       </Switch>
     </BrowserRouter>
   </Provider>),
