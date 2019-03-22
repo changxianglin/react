@@ -11,7 +11,10 @@ import './config'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducer'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
+
+import Login from  './container/login/login.js'
+import Register from  './container/register/register.js'
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
@@ -21,6 +24,10 @@ const store = createStore(reducers, compose(
 ReactDOM.render(
   (<Provider store = { store } >
     <BrowserRouter>
+      <div>
+        <Route path = "/login" component = {Login}></Route>
+        <Route path = "/register" component = {Register}></Route>
+      </div>
     </BrowserRouter>
   </Provider>),
 document.getElementById('root'))
