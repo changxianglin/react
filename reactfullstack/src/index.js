@@ -9,6 +9,7 @@ import {
  } from 'react-router-dom'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
+import './config'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 // import { counter } from './index.redux'
