@@ -15,16 +15,23 @@ import thunk from 'redux-thunk'
 
 import Login from  './container/login/login.js'
 import Register from  './container/register/register.js'
+import AuthRoute from './component/authroute/authroute'
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ))
 
+function Boss() {
+  return <h2>BOSS 页面</h2>
+}
+
 ReactDOM.render(
   (<Provider store = { store } >
     <BrowserRouter>
       <div>
+        <AuthRoute></AuthRoute>
+        <Route path = '/boss' component = {Boss}></Route>
         <Route path = "/login" component = {Login}></Route>
         <Route path = "/register" component = {Register}></Route>
       </div>
