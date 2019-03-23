@@ -8,6 +8,7 @@ import {
   Switch 
  } from 'react-router-dom'
 import './config'
+import './index.css'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducer'
