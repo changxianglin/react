@@ -1,5 +1,4 @@
 const express = require('express')
-const utils = require('utility')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const app = express()
@@ -8,6 +7,8 @@ const userRouter = require('./user')
 
 app.use(bodyParser())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.use('/user', userRouter)
 
