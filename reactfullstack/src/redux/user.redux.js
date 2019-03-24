@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 
 
 const REGISTER_SUCESS = 'REGISTER_SUCESS'
@@ -42,7 +42,7 @@ export function register({ user, pwd, repeatpwd, type }) {
   }
 
   return dispatch => {
-    Axios.get('/user/register', { user, pwd, type })
+    axios.post('/user/register', { user, pwd, type })
     .then(res => {
       if(res.status == 200 && res.data.code === 0) {
         dispatch(registerSuccess({ user, pwd, type }))
