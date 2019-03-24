@@ -5,8 +5,19 @@ const model = require('./config')
 const User = model.getModel('user')
 
 Router.get('/list', (req, res) => {
+  // User.remove({}, (e, d) => {})
   User.find({}, (err, doc) => {
     return res.json(doc)
+  })
+})
+
+Router.post('/login', (req, res) => {
+  const { user, pwd } = req.body
+  User.findOne({user, pwd: md5Pwd(pwd)}, {'pwd': 0}, (err, doc) => {
+    if(!doc) {
+      return res.json({ code: 1, msg: '用户名不存在或密码错误'})
+    }
+    return res.json({ code: 0, data: doc })
   })
 })
 
@@ -31,7 +42,7 @@ Router.get('/info', (req, res) => {
 })
 
 function md5Pwd(pwd) {
-  const salt = Math.random()
+  const salt = 'zhangsanlisi@wangermazi'
   return utils.md5(utils.md5(pwd + salt))
 }
 
