@@ -10,17 +10,19 @@ class AuthRoute extends React.Component {
     if(publicList.indexOf(pathName) > -1) {
       return null 
     }
-    axios.get('/user/info')
-      .then(res => {
-        if(res.status == 200) {
-          if(res.data.code == 0) {
 
-          } else {
-            this.props.history.push('/login')
-          }
-          console.log(res.data)
+    axios.get('/user/info')
+    .then(res => {
+      if(res.status == 200) {
+        if(res.data.code == 0) {
+
+        } else {
+          this.props.loadData(res.data.data)
+          this.props.history.push('/login')
         }
-      })
+        console.log(res.data)
+      }
+    })
   }
   render() {
     return (
