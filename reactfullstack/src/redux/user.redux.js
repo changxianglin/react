@@ -13,7 +13,6 @@ const initState = {
   isAuth: false,
   msg: '',
   user: '',
-  pwd: '',
   type: '',
 }
 
@@ -45,21 +44,8 @@ function errorMsg(msg) {
   return { type: ERROR_MSG, msg: msg}
 }
 
-function userInfo() {
-  return dispatch => {
-    axios.get('/user/info')
-    .then(res => {
-      if(res.status == 200) {
-        if(res.data.code == 0) {
-
-        } else {
-          this.props.loadData(res.data.data)
-          this.props.history.push('/login')
-        }
-        console.log(res.data)
-      }
-    })
-  }
+export function loadData(userinfo) {
+  return { type: LOAD_DATA, payload: userinfo }
 }
 
 export function login({user, pwd}) {

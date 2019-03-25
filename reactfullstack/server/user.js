@@ -30,11 +30,14 @@ Router.post('/register', (req, res) => {
     if(doc) {
       return res.json({code: 1, msg: '用户名已存在'})
     }
-    User.create({user, type, pwd: md5Pwd(pwd)}, (e, d) => {
+    const userModel = new User({user, type, pwd: md5Pwd(pwd)})
+    userModel.save((e, d) => {
       if(e) {
         return res.json({code: 1, msg: '后台出错了'})
       }
-      return res.json({code: 0})
+      const { user, type, _id } = d
+      res.cookie('userid', _id)
+      return res.json({ code: 0, data: {user, type, _id}})
     })
   })
 })
