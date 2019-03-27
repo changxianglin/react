@@ -17,7 +17,7 @@ import thunk from 'redux-thunk'
 import Login from  './container/login/login.js'
 import Register from  './container/register/register.js'
 import AuthRoute from './component/authroute/authroute'
-import BossInfo from './component/bossinfo/bossinfo'
+import BossInfo from './container/bossinfo/bossinfo'
 
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),

@@ -12,7 +12,7 @@ const initState = {
   redirectTo: '',
   isAuth: false,
   msg: '',
-  user: '',
+  user: '', 
   type: '',
 }
 
