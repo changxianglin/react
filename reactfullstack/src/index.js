@@ -35,7 +35,6 @@ ReactDOM.render(
         <Switch>
           <Route path = '/bossinfo' component = {BossInfo}></Route>
           <Route path = '/geniusinfo' component = {Geniusinfo}></Route>
-          <Route path = '/boss' component = {Boss}></Route>
           <Route path = "/login" component = {Login}></Route>
           <Route path = "/register" component = {Register}></Route>
           <Route component = {Dashboard}></Route>
