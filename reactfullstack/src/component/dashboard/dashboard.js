@@ -4,10 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import { NavBar } from 'antd-mobile';
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
-
-function Genius() {
-  return <h2>Genius page</h2>
-}
+import Genius from '../../component/genius/genius'
 
 function Msg() {
   return <h2>Msg page</h2>
