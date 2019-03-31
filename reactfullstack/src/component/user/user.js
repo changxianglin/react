@@ -1,16 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Result, List, WhiteSpace } from 'antd-mobile'
+import { Result, List, WhiteSpace, Modal } from 'antd-mobile'
+import browserCookie from 'browser-cookies'
 
 @connect(
   state => state.user
 )
 class User extends React.Component {
+  constructor(props) {
+    super(props)
+    this.logout = this.logout.bind(this) 
+  }
+  logout() {
+    const alert = Modal.alert
+
+    alert('注销', '确定注销???', [
+      {text: '取消', onPress: () => console.log('取消') },
+      {text: '确定', onPress: () => {
+        browserCookie.erase('userid')
+        window.location.href = window.location.href
+      }}
+    ])
+  }
+
   render() {
     const props = this.props
     const Item = List.Item
     const Brief = Item.Brief
-    console.log(this.props)
     return props.user ? (
       <div>
         <Result
@@ -18,7 +34,7 @@ class User extends React.Component {
           title = {props.user}
           message = { props.type == 'boss' ? props.company : null }
         />
-      <List renderHeader = {() => '简介'} >
+      <List renderHeader = {() => '简介'}>
         <Item multipleLine>
           {props.title}
           {props.desc.split('\n').map(v => <Brief key = {v}>{v}</Brief>)}
@@ -27,7 +43,7 @@ class User extends React.Component {
       </List>
       <WhiteSpace></WhiteSpace>
       <List>
-        <Item>
+        <Item style = {{zIndex: 1}} onClick = {this.logout}>
           退出登录
         </Item>
       </List>
