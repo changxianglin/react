@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavBar, Grid, List } from 'antd-mobile'
+import { Grid, List } from 'antd-mobile'
 import PropTypes from 'prop-types'
 class AvatartSelector extends React.Component {
   static propTypes = {

@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
         icon: 'boss',
         title: '牛人列表',
         component: Boss,
-        hide: user.type == 'genius'
+        hide: user.type === 'genius'
       },
       {
         path: '/genius',
@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
         icon: 'job',
         title: 'BOSS列表',
         component: Genius,
-        hide: user.type == 'boss'
+        hide: user.type === 'boss'
       },
       {
         path: '/msg',
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
 
     return (
         <div>
-          <NavBar className = "fixd-header" mode = 'dark'>{navList.find(v => v.path == pathname).title}</NavBar>
+          <NavBar className = "fixd-header" mode = 'dark'>{navList.find(v => v.path === pathname).title}</NavBar>
           <div style = {{marginTop: 45}}>
             <Switch>
                 {navList.map(v => (

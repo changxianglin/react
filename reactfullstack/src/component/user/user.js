@@ -20,7 +20,7 @@ class User extends React.Component {
     alert('注销', '确定注销???', [
       {text: '取消', onPress: () => console.log('取消') },
       {text: '确定', onPress: () => {
-        // browserCookie.erase('userid')
+        browserCookie.erase('userid')
         this.props.logoutSubmit()
       }}
     ])
@@ -30,13 +30,13 @@ class User extends React.Component {
     const props = this.props
     const Item = List.Item
     const Brief = Item.Brief
+    console.log(props)
     return props.user ? (
-      { props.redirecTo ? <Redirect to = {props.redirecTo}></Redirect> : null }
       <div>
         <Result
           img = {<img src = {require(`../img/${props.avatar}.png`)} style = {{ width: 50 }} alt = '' />}
           title = {props.user}
-          message = { props.type == 'boss' ? props.company : null }
+          message = { props.type === 'boss' ? props.company : null }
         />
       <List renderHeader = {() => '简介'}>
         <Item multipleLine>
@@ -52,7 +52,7 @@ class User extends React.Component {
         </Item>
       </List>
       </div>
-    ) : null 
+    ) : <Redirect to = {props.redirecTo} />
   }
 }
 
