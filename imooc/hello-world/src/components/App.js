@@ -28,15 +28,16 @@ export default class App extends Component {
     super(props)
     this.state = {
       todos: [],
-      filter: 'all'
+      filter: 'all',
     }
+    this.nextTodoId = 0
   }
   render() {
     const todos = this.getVisibleTodos()
     const {filter} = this.props
     return (
       <div>
-        <AddTodo />
+        <AddTodo addTodo = {this.addTodo} />
         <TodoList todos = {todos}/>
         <Footer filter = {filter} />
       </div>
@@ -52,6 +53,18 @@ export default class App extends Component {
       } else {
         return true
       }
+    })
+  }
+
+  addTodo = text => {
+    const todo = {
+      id: this.nextTodoId++,
+      text,
+      completed: false
+    }
+    const newTodos = [todo, ...this.state.todos]
+    this.setState({
+      todos: newTodos
     })
   }
 }
