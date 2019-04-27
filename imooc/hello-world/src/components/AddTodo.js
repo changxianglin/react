@@ -11,10 +11,16 @@ export default class AddTodo extends Component {
   render() {
     return (
       <div>
-        <input value = {this.state.text}  />
+        <input value = {this.state.text} onChange = {this.handleChange} />
         <button onClick = {this.handleClick}>Add</button>
       </div>
     )
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      text: e.target.value
+    })
   }
 
   handleClick = () => {
