@@ -3,26 +3,6 @@ import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import Footer from './Footer'
 
-const todos = [
-  {
-    id: 1,
-    text: "学习react",
-    completed: true,
-  },
-  {
-    id: 1,
-    text: "学习redux",
-    completed: false,
-  },
-  {
-    id: 1,
-    text: "学习react router",
-    completed: false,
-  }
-]
-
-const filter = 'all'
-
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -38,8 +18,8 @@ export default class App extends Component {
     return (
       <div>
         <AddTodo addTodo = {this.addTodo} />
-        <TodoList todos = {todos}/>
-        <Footer filter = {filter} />
+        <TodoList todos = {todos} toggleTodo = { this.toggleTodo }/>
+        <Footer filter = {filter} setVisibilityFilter = { this.setVisibilityFilter } />
       </div>
     )
   }
@@ -65,6 +45,21 @@ export default class App extends Component {
     const newTodos = [todo, ...this.state.todos]
     this.setState({
       todos: newTodos
+    })
+  }
+
+  toggleTodo = id => {
+    const newTodos = this.state.todos.map(item => {
+      return item.id === id ? {...item, completed: !item.completed} : item
+    })
+    this.setState({
+      todos: newTodos
+    })
+  }
+
+  setVisibilityFilter = filter => {
+    this.setState({
+      filter
     })
   }
 }
