@@ -13,10 +13,10 @@ class App extends React.Component {
       <div>
         <Nav />
         <Switch>
-          <Route path = '/about' component = {About} />
-          <Route path = '/contact' component = {Contact} />
+          <Route path = '/about' render = {(props) => <About {...props} />} />
+          <Route path = '/contact' children = {props => <div>{props.match ? "active" : "inactive"}</div>} />
           <Route path = '/user/:user' component = {User} />
-          <Route path = '/' exact component = {Home} />
+          <Route path = '/' exact component = {() => <Home />} />
         </Switch>
       </div>
     </Router>
