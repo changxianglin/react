@@ -15,38 +15,45 @@ class TodoList extends React.Component {
     return (
       <Fragment>
         <div>
-          <input value = {this.state.inputValue} onChange = {this.handleInputChnage} />
+          <input 
+            value = {this.state.inputValue} 
+            onChange = {this.handleInputChnage} />
           <button onClick = {this.handleBtnClick}>提交</button>
         </div>
           <ul>
-            {
-              this.state.list.map((item, index) => {
-                return <TodoItem content = {item} index = { index } deleteItem = {this.handleItemDelete.bind(this)} />
-              })
-            }
+            { this.getTodoItem() }
           </ul>
       </Fragment>
     );
   }
 
+  getTodoItem = () => {
+    return (
+      this.state.list.map((item, index) => {
+        return <TodoItem key = {index} content = {item} index = { index } deleteItem = {this.handleItemDelete.bind(this)} />
+      })
+    )
+  }
+
   handleInputChnage = (e) => {
-    this.setState({
-      inputValue: e.target.value
-    })
+    const value = e.target.value
+    this.setState(() => ({
+      inputValue: value,
+    }))
   }
 
   handleBtnClick = () => {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
+    this.setState((prevState) => ({
+      list: [...prevState.list, prevState.inputValue],
       inputValue: '',
-    })
+    }))
   }
 
   handleItemDelete = (index) => {
-    const list = [...this.state.list]
-    list.splice(index, 1)
-    this.setState({
-      list
+    this.setState((prevState) => {
+      const list = [...prevState.list]
+      list.splice(index, 1)
+      return { list }
     })
   }
 }
