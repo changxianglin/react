@@ -22,7 +22,6 @@ class TodoList extends React.Component {
             {
               this.state.list.map((item, index) => {
                 return <TodoItem content = {item} index = { index } deleteItem = {this.handleItemDelete.bind(this)} />
-                // return <li key = {index} onClick = {() => this.handleItemDelete(index)}>{item}</li>
               })
             }
           </ul>
