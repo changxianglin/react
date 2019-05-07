@@ -16,7 +16,8 @@ class TodoList extends React.Component {
       <Fragment>
         <div>
           <input 
-            value = {this.state.inputValue} 
+            value = {this.state.inputValue}
+            onKeyDown = {this.enterKey} 
             onChange = {this.handleInputChnage} />
           <button onClick = {this.handleBtnClick}>提交</button>
         </div>
@@ -33,6 +34,12 @@ class TodoList extends React.Component {
         return <TodoItem key = {index} content = {item} index = { index } deleteItem = {this.handleItemDelete.bind(this)} />
       })
     )
+  }
+
+  enterKey = (e) => {
+    if(e.keyCode === 13) {
+      this.handleBtnClick()
+    }
   }
 
   handleInputChnage = (e) => {
