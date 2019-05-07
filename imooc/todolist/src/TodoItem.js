@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 export default class TodoItem extends Component {
   render() {
     const { content, test } = this.props
+    console.log("Test render")
     return (
       <div onClick = {this.handleClick}>
         { test } - { content }
