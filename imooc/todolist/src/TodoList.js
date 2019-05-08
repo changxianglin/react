@@ -1,4 +1,5 @@
 import React, { Fragment} from 'react';
+import axios from 'axios'
 import TodoItem from './TodoItem'
 import Test from './Test'
 
@@ -28,6 +29,17 @@ class TodoList extends React.Component {
           <Test content = { this.state.inputValue } />
       </Fragment>
     );
+  }
+
+  componentDidMount() {
+    axios.get('/api/todolist')
+      .then((res) => {
+        const result = res.data
+        this.setState(() => ({
+          list: [...result.data]
+        }))
+      })
+      .catch(() => { alert('error') })
   }
 
   getTodoItem = () => {
