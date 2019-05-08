@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class TodoItem extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.content !== this.props.content) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
     const { content, test } = this.props
-    console.log("Test render")
     return (
       <div onClick = {this.handleClick}>
         { test } - { content }
