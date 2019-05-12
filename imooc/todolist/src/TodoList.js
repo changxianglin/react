@@ -1,38 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {
+  changInputValue,
+  addItem,
+  deleteItem
+} from './store/actionCreators'
 
-class TodoList extends Component {
-  render() {
-    return (
-      <div>
+const TodoList = (props) => {
+  const {
+    inputValue,
+    handleInputChange,
+    list,
+    handleClick,
+    handleDeleteItem
+  } = props
+
+  return (
+    <div>
         <div>
           <input 
-            value = { this.props.inputValue }
-            onChange = { this.props.handleInputChange }
+            value = { inputValue }
+            onChange = { handleInputChange }
           />
-          <button>提交</button>
+          <button onClick = { handleClick}>提交</button>
         </div>
         <ul>
-          <li>zhang</li>
+          {
+            list.map((item, index) => {
+              return <li key = { index } onClick = { () => {handleDeleteItem(index)}}>{ item }</li>
+            })
+          }
         </ul>
       </div>
-    )
-  }
+  )
 }
 
 const mapStateToProps = (state) => {
   return {
     inputValue: state.inputValue,
+    list: state.list,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputChange(e) {
-      const action = {
-        type: 'change_input_value',
-        value: e.target.value,
-      }
+      const value = e.target.value
+      const action = changInputValue(value)
+      dispatch(action)
+    },
+    handleClick() {
+      const action = addItem()
+      dispatch(action)
+    },
+    handleDeleteItem(index) {
+      const action = deleteItem(index)
       dispatch(action)
     }  
   }
