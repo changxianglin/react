@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 export default class Footer extends Component {
   render() {
     const { filter, setVisibilityFilter } = this.props
-    console.log(filter)
     return (
       <div>
         <span>Show: </span>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import Footer from './Footer'
-import { ifError } from 'assert';
 
 export default class App extends Component {
   constructor(props) {
