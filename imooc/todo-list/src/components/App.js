@@ -2,26 +2,7 @@ import React, { Component } from 'react'
 import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import Footer from './Footer'
-
-const todos = [
-  {
-    id: 1,
-    text: '学习 react',
-    completed: true,
-  },
-  {
-    id: 2,
-    text: '学习 redux',
-    completed: false,
-  },
-  {
-    id: 3,
-    text: '学习 react router',
-    completed: false,
-  },
-]
-
-const filter = 'all'
+import { ifError } from 'assert';
 
 export default class App extends Component {
   constructor(props) {
@@ -30,16 +11,17 @@ export default class App extends Component {
       todos: [],
       filter: 'all',
     }
+    this.nextTodoId = 0
   }
 
   render() {
     const todos = this.getVisibleTodos()
-    const { filter } = this.props
+    const { filter } = this.state
     return (
       <div>
-        <AddTodo />
-        <TodoList todos = { todos }/>
-        <Footer filter = { filter } />
+        <AddTodo addTodo = { this.addTodo } />
+        <TodoList todos = { todos } toggleTodo = { this.toggleTodo }/>
+        <Footer filter = { filter } setVisibilityFilter = { this.setVisibilityFilter } />
       </div>
     )
   }
@@ -54,6 +36,33 @@ export default class App extends Component {
       } else {
         return true
       }
+    })
+  }
+
+  addTodo = text => {
+    const todos = {
+      id: this.nextTodoId++,
+      text,
+      completed: false,
+    }
+    const newTodos = [todos, ...this.state.todos]
+    this.setState({
+      todos: newTodos
+    })
+  }
+
+  toggleTodo = id => {
+    const newTodos = this.state.todos.map(item => {
+      return item.id === id ? { ...item, completed: !item.completed } : item
+    })
+    this.setState({
+      todos: newTodos,
+    })
+  }
+
+  setVisibilityFilter = filter => {
+    this.setState({
+      filter,
     })
   }
 }
