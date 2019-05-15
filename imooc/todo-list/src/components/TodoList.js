@@ -4,6 +4,11 @@ import Todo from './Todo'
 
 export default class TodoList extends Component {
 
+  componentDidMount() {
+    const { fetchTodos } = this.props
+    fetchTodos()
+  }
+
   render() {
     const { todos, toggleTodo } = this.props
     return (
