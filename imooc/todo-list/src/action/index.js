@@ -5,7 +5,7 @@ import {
   SET_TODO_TEXT,
 } from './actionTypes'
 
-const nextTodoId = 0
+var nextTodoId = 0
 
 export const addTodo = (text) => ({
   type: ADD_TODO,
