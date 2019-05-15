@@ -1,29 +1,23 @@
 import React, { Component } from 'react'
 
 export default class AddTodo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      text: ''
-    }
-  }
-
   render() {
+    const { text } = this.props
     return (
       <div>
-        <input value = {this.state.text} onChange = { this.handleChange} />
-        <button onClick = {this.handleClick}>Add</button>
+        <input value = { text } onChange = { this.handleChange } />
+        <button onClick = { this.handleClick }>Add</button>
       </div>
     )
   }
 
   handleChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    })
+    const { setTodoText } = this.props
+    setTodoText(e.target.value)
   }
 
   handleClick = () => {
-    this.props.addTodo(this.state.text)
+    const { addTodo, text } = this.props
+    addTodo(text)
   }
 }

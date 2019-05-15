@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import Todo from './Todo'
 
 export default class TodoList extends Component {
+
   render() {
     const { todos, toggleTodo } = this.props
     return (
@@ -16,4 +18,9 @@ export default class TodoList extends Component {
       </div>
     )
   }
+}
+
+TodoList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  toggleTodo: PropTypes.func.isRequired,
 }
