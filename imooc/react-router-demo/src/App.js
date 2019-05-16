@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import Home from './Home'
 import About from './About'
@@ -13,10 +13,12 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
-          <Route path = '/' exact component = {Home} />
-          <Route path = '/about' component = {About} />
-          <Route path = '/contact' component = {Contact} />
-          <Route path = '/user/:user' component = {User} />
+          <Switch>
+            <Route path = '/about' component = {About} />
+            <Route path = '/contact' component = {Contact} />
+            <Route path = '/user/:user' component = {User} />
+            <Route path = '/' component = {Home} />
+          </Switch>
         </div>
       </Router>
     )
