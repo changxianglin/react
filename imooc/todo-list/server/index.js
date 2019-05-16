@@ -29,7 +29,7 @@ app.get('/api/test', (req, res) => {
   res.send(data)
 })
 
-app.post('/api/foo', (req, res) => {
+app.post('/api/foo/:fooId', (req, res) => {
   res.send(data1)
 })
 
