@@ -4,7 +4,11 @@ export const schema = {
 }
 
 const reducer = (state = {}, action) => {
-  return state 
+  if(action.response && action.response.products) {
+    return {...state, ...action.response.products}
+  }
+
+  return state
 }
 
 export default reducers
