@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import ErrorToast from '../../components/ErrorToast'
 import Home from '../Home'
-import './style.css';
 import { actions as appActions, getError } from '../../redux/modules/app';
 
 class App extends Component{
