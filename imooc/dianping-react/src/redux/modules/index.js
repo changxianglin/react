@@ -10,3 +10,5 @@ const rootReducer = combineReducers({
   detail,
   app,
 }) 
+
+export default rootReducer

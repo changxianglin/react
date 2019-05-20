@@ -6,11 +6,11 @@ export const FETCH_DATA = 'FETCH DATA'
 export default store => next => action => {
   const allAPI = action[FETCH_DATA]
 
-  if(typeof callAPI === 'undefined') {
+  if(typeof allAPI === 'undefined') {
     return next(action)
   }
 
-  const { endpoint, schema, types } = callAPI
+  const { endpoint, schema, types } = allAPI
 
   if(typeof endpoint !== 'string') {
     throw new Error('endpoint 必须为字符串类型的 URL')

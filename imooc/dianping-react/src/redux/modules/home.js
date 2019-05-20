@@ -1,7 +1,7 @@
 import { get } from '../../utils/request'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api';
-import { schema } from '../middleware/api'
+import { schema } from './entities/products'
 
 export const types = {
   FETCH_LIKES_REQUEST: "HOME/FETCH_LIKES_REQUEST", //获取猜你喜欢请求
@@ -21,9 +21,9 @@ export const actions = {
 const fetchLikes = (endpoint) => ({
   [FETCH_DATA]: {
     types: [
-      type.FETCH_LIKES_REQUEST,
-      type.FETCH_LIKES_SUCCESS,
-      type.FETCH_LIKES_FAILURE,
+      types.FETCH_LIKES_REQUEST,
+      types.FETCH_LIKES_SUCCESS,
+      types.FETCH_LIKES_FAILURE,
     ],
     endpoint,
     schema,
