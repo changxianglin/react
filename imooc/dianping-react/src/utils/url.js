@@ -1,3 +1,3 @@
 export default {
-  getProductList: (rowIndex, pageSize) =>  `/mock/procuts/likes.json?rowIndex=${rowIndex}&pageSize=${pageSize}`
+  getProductList: (path, rowIndex, pageSize) =>  `/mock/procuts/${path}.json?rowIndex=${rowIndex}&pageSize=${pageSize}`
 }
