@@ -9,6 +9,18 @@ export const types = {
   FETCH_LIKES_FAILURE: "HOME/FETCH_LIKES_FAILURE", //获取猜你喜欢请求失败
 }
 
+const initialState = {
+  likes: {
+    isFetching: false,
+    pageCount: 0,
+    ids: [],
+  },
+  discounts: {
+    isFetching: false,
+    ids: [],
+  }
+}
+
 export const actions = {
   loadLikes: () => {
     return (dispatch, getState) => {
