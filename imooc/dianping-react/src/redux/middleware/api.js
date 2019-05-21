@@ -38,7 +38,7 @@ export default store => next => action => {
 
   next(actionWith({type: requestType}))
 
-  return FETCH_DATA(endpoint, schema).then(
+  return fetchData(endpoint, schema).then(
     response => next(actionWith({
       type: successType,
       response,

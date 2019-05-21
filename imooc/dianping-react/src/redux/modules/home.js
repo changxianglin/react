@@ -80,6 +80,7 @@ const likes = (state = initialState.likes, action) => {
     case types.FETCH_LIKES_REQUEST:
       return {...state, isFetching: true}
     case types.FETCH_LIKES_SUCCESS:
+      console.log(action, 'likes response')
       return {...state, isFetching: false, pageCount: state.pageCount + 1, ids: state.ids.concat(action.response.id)}
     case types.FETCH_LIKES_FAILURE:
       return {...state, isFetching: false}
@@ -93,6 +94,7 @@ const discounts = (state = initialState.discounts, action) => {
     case types.FETCH_DISCOUNT_REQUEST:
       return {...state, isFetching: true}
     case types.FETCH_DISCOUNT_SUCCESS:
+      console.log(action, 'discounts response')
       return {...state, isFetching: false, ids: state.ids.concat(action.response.id)}
     case types.FETCH_DISCOUNT_FAILURE:
       return {...state, isFetching: false}
@@ -109,3 +111,22 @@ const reducer = combineReducers({
 })
 
 export default reducer
+
+
+// selectors
+
+export const getLikes = (state) => {
+  return state.home.likes.ids.map(id => {
+    return state.entities.products[id]
+  }) 
+}
+
+export const getDiscounts = (state) => {
+  return state.home.discounts.ids.map(id => {
+    return state.entities.products[id]
+  })
+}
+
+export const getPageCountOfLikes = (state) => {
+  return state.home.likes.pageCount
+}
