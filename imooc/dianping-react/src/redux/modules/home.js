@@ -1,4 +1,4 @@
-import { get } from '../../utils/request'
+import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api';
 import { schema } from './entities/products'
@@ -75,14 +75,37 @@ const fetchDiscounts = (endpoint) => ({
   }
 })
 
-const reducer = (state = {}, action) => {
+const likes = (state = initialState.likes, action) => {
   switch(action.type) {
     case types.FETCH_LIKES_REQUEST:
+      return {...state, isFetching: true}
     case types.FETCH_LIKES_SUCCESS:
+      return {...state, isFetching: false, pageCount: state.pageCount + 1, ids: state.ids.concat(action.response.id)}
     case types.FETCH_LIKES_FAILURE:
-    default:
+      return {...state, isFetching: false}
+    default: 
       return state
   }
 }
+
+const discounts = (state = initialState.discounts, action) => {
+  switch(action.type) {
+    case types.FETCH_DISCOUNT_REQUEST:
+      return {...state, isFetching: true}
+    case types.FETCH_DISCOUNT_SUCCESS:
+      return {...state, isFetching: false, ids: state.ids.concat(action.response.id)}
+    case types.FETCH_DISCOUNT_FAILURE:
+      return {...state, isFetching: false}
+    default: 
+      return state
+  }
+}
+
+
+
+const reducer = combineReducers({
+  likes,
+  discounts,
+})
 
 export default reducer
