@@ -80,7 +80,6 @@ const likes = (state = initialState.likes, action) => {
     case types.FETCH_LIKES_REQUEST:
       return {...state, isFetching: true}
     case types.FETCH_LIKES_SUCCESS:
-      console.log(action, 'likes response')
       return {...state, isFetching: false, pageCount: state.pageCount + 1, ids: state.ids.concat(action.response.id)}
     case types.FETCH_LIKES_FAILURE:
       return {...state, isFetching: false}
@@ -122,6 +121,7 @@ export const getLikes = (state) => {
 }
 
 export const getDiscounts = (state) => {
+  console.log(state)
   return state.home.discounts.ids.map(id => {
     return state.entities.products[id]
   })
