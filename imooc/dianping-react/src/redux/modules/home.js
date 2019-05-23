@@ -38,14 +38,22 @@ export const actions = {
     return (dispatch, getState) => {
       const {pageCount} = getState().home.likes
       const rowIndex = pageCount * params.PAGE_SIZE_LIKES
-      const endpoint = url.getProductList(params.PATH_LIKES, rowIndex, params.PAGE_SIZE_LIKES)
+      const endpoint = url.getProductList(
+        params.PATH_LIKES, 
+        rowIndex, 
+        params.PAGE_SIZE_LIKES
+        )
       return dispatch(fetchLikes(endpoint))
     }
   },
   // 加载超值特惠
   loadDiscounts: () => {
     return (dispatch, getState) => {
-      const endpoint = url.getProductList(params.PATH_DISCOUNTS, 0, params.PAGE_SIZE_DISCOUNTS)
+      const endpoint = url.getProductList(
+        params.PATH_DISCOUNTS, 
+        0, 
+        params.PAGE_SIZE_DISCOUNTS
+        )
       return dispatch(fetchDiscounts(endpoint))
     }
   }
@@ -78,11 +86,22 @@ const fetchDiscounts = (endpoint) => ({
 const likes = (state = initialState.likes, action) => {
   switch(action.type) {
     case types.FETCH_LIKES_REQUEST:
-      return {...state, isFetching: true}
+      return {
+        ...state, 
+        isFetching: true
+      }
     case types.FETCH_LIKES_SUCCESS:
-      return {...state, isFetching: false, pageCount: state.pageCount + 1, ids: state.ids.concat(action.response.id)}
+      return {
+        ...state, 
+        isFetching: false, 
+        pageCount: state.pageCount + 1, 
+        ids: state.ids.concat(action.response.ids)
+      }
     case types.FETCH_LIKES_FAILURE:
-      return {...state, isFetching: false}
+      return {
+        ...state, 
+        isFetching: false
+      }
     default: 
       return state
   }
@@ -91,12 +110,21 @@ const likes = (state = initialState.likes, action) => {
 const discounts = (state = initialState.discounts, action) => {
   switch(action.type) {
     case types.FETCH_DISCOUNT_REQUEST:
-      return {...state, isFetching: true}
+      return {
+        ...state, 
+        isFetching: true
+      }
     case types.FETCH_DISCOUNT_SUCCESS:
-      console.log(action, 'discounts response')
-      return {...state, isFetching: false, ids: state.ids.concat(action.response.id)}
+      return {
+        ...state, 
+        isFetching: false, 
+        ids: state.ids.concat(action.response.ids)
+      }
     case types.FETCH_DISCOUNT_FAILURE:
-      return {...state, isFetching: false}
+      return {
+        ...state, 
+        isFetching: false
+      }
     default: 
       return state
   }
@@ -121,7 +149,6 @@ export const getLikes = (state) => {
 }
 
 export const getDiscounts = (state) => {
-  console.log(state)
   return state.home.discounts.ids.map(id => {
     return state.entities.products[id]
   })

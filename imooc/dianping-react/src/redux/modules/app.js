@@ -17,7 +17,7 @@ const reducer = (state = initalState, action) => {
   const { type, error } = action
   if(type === types.CLEARE_ERROR) {
     return {...state, error: null}
-  } else {
+  } else if(error) {
     return {...state, error: error}
   }
   return state 
