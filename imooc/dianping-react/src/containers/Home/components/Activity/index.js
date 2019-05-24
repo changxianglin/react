@@ -15,6 +15,7 @@ class Activity extends Component {
               速领新人红包
             </div>
             <img
+              alt = ''
               className="activity__pic"
               src="https://op.meituan.net/oppkit_pic/20160310032241-1e027deb-2/a3a31fff2e047a907a53d6488877f7fe.png"
             />
@@ -30,6 +31,7 @@ class Activity extends Component {
               享吃喝玩乐礼
             </div>
             <img
+              alt = ''
               className="activity__pic"
               src="https://op.meituan.net/oppkit_pic/20160310032241-1e027deb-2/a9b8c52c341892600ff7260c89025a59.png"
             />

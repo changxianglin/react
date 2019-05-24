@@ -8,18 +8,18 @@ export default class Discount extends Component {
     const {data} = this.props
     return (
       <div className = 'discount'>
-        <a className = 'discount__header'>
+        <div className = 'discount__header'>
           <span className = 'discount__title'>超值特惠</span>
           <span className = 'discount__more'>更多优惠</span>
           <span className = 'discount__arrow' />
-        </a>
+        </div>
         <div className = 'discount__cotent'>
         {
           data.map((item, index) => {
             return (
               <Link to = {`/detail/${item.id}`} className = 'discount__item' key = {item.id}>
               <div className = 'discount__itemPic'>
-                <img width = '100%' height = '100%' src = {item.picture} />
+                <img width = '100%' height = '100%' src = {item.picture} alt = '' />
               </div>
               <div className = 'discount__itemTitle'>
                 {item.shop}

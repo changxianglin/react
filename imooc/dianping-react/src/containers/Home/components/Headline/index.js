@@ -50,7 +50,7 @@ export default class HeadLine extends Component {
                       {item.title}
                     </div>
                     <div className = 'headline__sliderImgWrapper'>
-                      <img className = 'headline__sliderImg' src = {item.pic} />
+                      <img className = 'headline__sliderImg' src = {item.pic} alt = '' />
                     </div>
                   </a>
                 )

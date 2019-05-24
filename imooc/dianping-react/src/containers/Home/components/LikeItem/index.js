@@ -18,7 +18,7 @@ export default class LikeItem extends Component {
       <Link className="likeItem" to = {`/detail/${id}`}>
         <div className="likeItem__picContainer">
           <div className="likeItem__picTag">{tag}</div>
-          <img className="likeItem__pic" src={picture} />
+          <img className="likeItem__pic" src={picture} alt = '' />
         </div>
         <div className="likeItem__content">
           <div className="likeItem__shop">{shop}</div>

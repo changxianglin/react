@@ -26,9 +26,9 @@ export default class LikeList extends Component {
           pageCount < 3 ? (
             <Loading />
           ) : (
-            <a className = 'likeList__viewAll'>
+            <div className = 'likeList__viewAll'>
               查看更多
-            </a>
+            </div>
           )
         }
       </div>
