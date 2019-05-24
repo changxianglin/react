@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import ErrorToast from '../../components/ErrorToast'
 import Home from '../Home'
 import { actions as appActions, getError } from '../../redux/modules/app';
+import ProductDetail from '../ProductDetail';
 
 class App extends Component{
   render() {
@@ -13,6 +14,7 @@ class App extends Component{
       <div className="App">
       <Router>
         <Switch>
+          <Route path = '/detail/:id' component = {ProductDetail} />
           <Route path = '/' component = { Home } />
         </Switch>
       </Router>
