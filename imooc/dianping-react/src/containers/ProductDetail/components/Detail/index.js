@@ -52,7 +52,7 @@ export default class Detail extends Component {
         <span className="detail__notice">(建议Wifi环境下打卡，土豪请随意)</span>
         <i className="detail__arrow"/>
       </div>
-    </div>
+    </div> 
     )
   }
 }
