@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api'
 import { schema as shopSchema, getShopById } from './entities/shops'
@@ -37,7 +38,7 @@ export const actions = {
       return dispatch(fetchProductDetail(endpoint, id))
     }
   },
-  // 获取店铺信息
+  // 获取店铺信息 
   loadShopById: id => {
     return (dispatch, getState) => {
       const shop = getShopById(getState(), id)
@@ -86,8 +87,37 @@ const fetchShopSuccess = (id) => ({
   id,
 })
 
-const reducer = (state = {}, action) => {
-  return state 
+// 商品详情 reducer
+const product = (state = initialState.product, action) => {
+  switch(action.type) {
+    case types.FETCH_PRODUCT_DETAIL_REQUEST:
+      return {...state, isFetching: true}
+    case types.FETCH_PRODUCT_DETAIL_SUCCESS:
+      return {...state, id: action.id,  isFetching: false}
+    case types.FETCH_PRODUCT_DETAIL_FAILURE:
+      return {...state, id: null, isFetching: false}
+    default:
+      return state
+  }
 }
+
+// 店铺 reducer
+const relatedShop = (state = {}, action) => {
+  switch(action.type) {
+    case types.FETCH_SHOP_REQUEST:
+      return {...state, isFetching: true}
+    case types.FETCH_SHOP_SUCCESS:
+      return {...state, id: action.id,  isFetching: false}
+    case types.FETCH_SHOP_FAILURE:
+      return {...state, id: null, isFetching: false}
+    default:
+      return state
+  }
+}
+
+const reducer = combineReducers({
+  product,
+  relatedShop,
+})
 
 export default reducer
