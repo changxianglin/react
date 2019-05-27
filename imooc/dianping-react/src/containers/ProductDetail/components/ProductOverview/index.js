@@ -4,12 +4,12 @@ import './style.css'
 
 export default class ProductOverview extends Component {
   render() {
-    const {id, shop, picture, description, currentPrice, oldPrice} = this.props
+    const {id, shop, picture, description, currentPrice, oldPrice} = this.props.data
     return (
       <div className = 'productOverview'>
         <div className = 'productOverview__header'>
           <div className = 'productOverview__imgContainer'>
-            <img className = 'productOverview__img' src = {picture} />
+            <img className = 'productOverview__img' src = {picture} alt = '' />
           </div>
           <div className = 'productOverview__baseInfo'>
             <div className = 'productOverview__title'>{shop}</div>

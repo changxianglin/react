@@ -3,6 +3,7 @@ import './style.css'
 
 export default class Remark extends Component {
   render() {
+    const {purchaseNotes, validityPeriod} = this.props.data
     return (
       <div className = 'remark'>
         <div className = 'remark__header'>
@@ -15,41 +16,21 @@ export default class Remark extends Component {
               有效期
             </dt>
             <dd className = 'remark__itemDesc'>
-              2018-10-20至2019-9-15
+              {validityPeriod}
             </dd>
           </dl>
-          <dl className = 'remark__item'>
-            <dt className = 'remark__itemTitle'>
-              有效期
-            </dt>
-            <dd className = 'remark__itemDesc'>
-              2018-10-20至2019-9-15
-            </dd>
-          </dl>
-          <dl className = 'remark__item'>
-            <dt className = 'remark__itemTitle'>
-              有效期
-            </dt>
-            <dd className = 'remark__itemDesc'>
-              2018-10-20至2019-9-15
-            </dd>
-          </dl>
-          <dl className = 'remark__item'>
-            <dt className = 'remark__itemTitle'>
-              有效期
-            </dt>
-            <dd className = 'remark__itemDesc'>
-              2018-10-20至2019-9-15
-            </dd>
-          </dl>
-          <dl className = 'remark__item'>
-            <dt className = 'remark__itemTitle'>
-              有效期
-            </dt>
-            <dd className = 'remark__itemDesc'>
-              2018-10-20至2019-9-15
-            </dd>
-          </dl>
+          {purchaseNotes.map((item, index) => {
+            return (
+              <dl key = {index} className = 'remark__item'>
+              <dt className = 'remark__itemTitle'>
+                {item.title}
+              </dt>
+              <dd className = 'remark__itemDesc'>
+                {item.content}
+              </dd>
+            </dl>
+            )
+          })}
         </div>
       </div>
     )
