@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api'
 import { schema as shopSchema, getShopById } from './entities/shops'
-import { schema as productSchema, getProductDetail } from './entities/products'
+import { schema as productSchema, getProductDetail, getProductById } from './entities/products'
 
 export const types = {
   // 获取商品详情
@@ -121,3 +121,20 @@ const reducer = combineReducers({
 })
 
 export default reducer
+
+
+// selector
+// 获取商品详情
+export const getProduct = (state, id) => {
+  return getProductDetail(state, id)
+}
+
+// 获取关联的店铺信息
+export const getRelatedShop = (state, productId) => {
+   const product = getProductById(state, productId)
+   let shopId =  product ? product.nearestShop : null
+   if(shopId) {
+     return getShopById(state, shopId)
+   }
+   return null
+}
