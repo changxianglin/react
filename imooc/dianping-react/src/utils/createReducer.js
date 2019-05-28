@@ -1,7 +1,7 @@
 const createReducer = (name) => {
   return (state = {}, action) => {
-    if(action.response && action.response.products) {
-      return {...state, ...action.response.products[name]}
+    if(action.response && action.response[name]) {
+      return {...state, ...action.response[name]}
     }
   
     return state

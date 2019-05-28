@@ -147,7 +147,6 @@ export default reducer
 // selectors
 
 export const getLikes = (state) => {
-  console.log(state.entities)
   return state.home.likes.ids.map(id => {
     return state.entities.products[id]
   }) 
