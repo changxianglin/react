@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SearchBox from './components/SearchBox';
 import PopularSearch from './components/PopularSearch'
+import SearchHistory from './components/SearchHistory'
 
 export default class Search extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class Search extends Component {
       <div>
         <SearchBox />
         <PopularSearch />
+        <SearchHistory />
       </div>
     )
   }
