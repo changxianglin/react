@@ -1,34 +1,6 @@
 import React, { Component } from 'react'
 import './style.css'
 
-const data = [
-  {
-    id: 1,
-    keyword: "火锅",
-    quantity: 8710
-  },
-  {
-    id: 2,
-    keyword: "火锅自助",
-    quantity: 541
-  },
-  {
-    id: 3,
-    keyword: "火锅 三里屯",
-    quantity: 65
-  },
-  {
-    id: 4,
-    keyword: "火锅 望京",
-    quantity: 133
-  },
-  {
-    id: 5,
-    keyword: "火锅家常菜",
-    quantity: 179
-  }
-];
-
 export default class SearchBox extends Component {
 
   render() {
@@ -50,7 +22,7 @@ export default class SearchBox extends Component {
     return (
       <ul className = 'searchBox__list'>
         {
-          relatedKeywords.map((item) => {
+          this.props.relatedKeywords.map((item) => {
             return (
               <li key = {item.id} className = 'searchBox__item' onClick = {this.handleClickItem.bind(this, item)}>
                 <span className = 'searchBox__itemKeyword'>{item.keyword}</span>

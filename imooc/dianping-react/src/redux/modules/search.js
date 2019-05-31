@@ -39,8 +39,8 @@ export const action = {
   // 获取热门关键词
   loadPopularKeywords: () => {
     return (dispatch, getState) => {
-      const { id } = getState().search.popularKeywords
-      if(id.length > 0) {
+      const { ids } = getState().search.popularKeywords
+      if(ids.length > 0) {
         return null
       }
       const endpoint = url.getPopularKeywords()
