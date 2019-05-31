@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api'
-import { schema as keywordSchema } from './entities/keywords'
+import { schema as keywordSchema, getKeywordById } from './entities/keywords'
 
 export const types = {
   // 获取热门关键词
@@ -40,7 +40,7 @@ export const action = {
   loadPopularKeywords: () => {
     return (dispatch, getState) => {
       const { id } = getState().search.popularKeywords
-      if(ids.length > 0) {
+      if(id.length > 0) {
         return null
       }
       const endpoint = url.getPopularKeywords()
@@ -99,7 +99,7 @@ const fetchRelatedKeywords = (text, endpoint) => ({
   text,
 })
 
-const popularkeywords = (state = initialState.popularKeywords, action) => {
+const popularKeywords = (state = initialState.popularKeywords, action) => {
   switch(action.type) {
     case types.FETCH_POPULAR_KEYWORDS_REQUEST:
       return {...state, isFetching: true}
@@ -165,9 +165,10 @@ const historyKeywords = (state = initialState.historyKeywords, action) => {
   switch(action.type) {
     case types.ADD_HISTORY_KEYWORD:
       const data = state.filter(item => {
-        if(item != action.text) {
+        if(item !== action.text) {
           return true
         }
+        return false
       })
       return [action.text, ...data]
     case types.CLEAR_HISTORY_KEYWORDS:
@@ -177,7 +178,7 @@ const historyKeywords = (state = initialState.historyKeywords, action) => {
   }
 }
 
-const reducer = combineReducersl({
+const reducer = combineReducers({
   popularKeywords,
   relatedKeywords,
   inputText,
@@ -185,3 +186,34 @@ const reducer = combineReducersl({
 })
 
 export default reducer
+
+// selectors
+export const getPopularKeywords = state => {
+  return state.search.popularKeywords.ids.map(id => {
+    return getKeywordById(state, id)
+  })
+}
+
+export const getRelatedKeywords = state => {
+  const text = state.search.inputText
+  if(!text || text.trim().length === 0) {
+    return []
+  }
+  const relatedKeywords = state.search.relatedKeywords[text]
+  if(!relatedKeywords) {
+    return []
+  } 
+  return relatedKeywords.ids.map(id => {
+    return getKeywordById(state, id)
+  })
+}
+
+export const getInputText = state => {
+  return state.search.inputText
+}  
+
+export const getHistoryKeywords = state => {
+  return state.search.historyKeywords.map(id => {
+    return getKeywordById(state, id)
+  })
+}
