@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import url from '../../utils/url'
 import { FETCH_DATA } from '../middleware/api'
 import { schema as keywordSchema, getKeywordById } from './entities/keywords'
-import { schema as shopSchema } from './entities/shops'
+import { schema as shopSchema, getShopById } from './entities/shops'
 
 export const types = {
   // 获取热门关键词
@@ -40,12 +40,12 @@ const initialState = {
 
   },
   historyKeywords: [], // 保存关键字
-  searchedShopByKeyword: {
+  searchedShopsByKeyword: {
 
   }
 }
 
-export const action = {
+export const actions = {
   // 获取热门关键词
   loadPopularKeywords: () => {
     return (dispatch, getState) => {
@@ -70,8 +70,8 @@ export const action = {
   },
   loadRelatedShops: keyword => {
     return (dispatch, getState) => {
-      const { searchedShopByKeyword } = getState().search
-      if(searchedShopByKeyword[keyword]) {
+      const { searchedShopsByKeyword } = getState().search
+      if(searchedShopsByKeyword[keyword]) {
         return null
       }
       const endpoint = url.getRelatedShops(keyword)
@@ -166,21 +166,21 @@ const relatedKeywords = (state = initialState.relatedKeywords, action) => {
   }
 }
 
-const searchedShopsByKeyword = (state = initialState.searchedShopByKeyword, action) => {
+const searchedShopsByKeyword = (state = initialState.searchedShopsByKeyword, action) => {
   switch(action.type) {
     case types.FETCH_SHOPS_REQUEST:
     case types.FETCH_SHOPS_SUCCESS:
     case types.FETCH_SHOPS_FAILURE:
       return {
         ...state,
-        [action.text]: searchShops(state[action.text], action),
+        [action.text]: searchedShops(state[action.text], action)
       }
     default:
       return state
   }
 }
 
-const searchShops = (state = {isFetching: false, ids: []}, action) => {
+const searchedShops = (state = {isFetching: false, ids: []}, action) => {
   switch(action.type) {
     case types.FETCH_SHOPS_REQUEST:
       return {...state, isFetching: true}
@@ -277,4 +277,23 @@ export const getHistoryKeywords = state => {
   return state.search.historyKeywords.map(id => {
     return getKeywordById(state, id)
   })
+}
+
+export const getSearchedShops = state => {
+  const keywordId = state.search.historyKeywords[0]
+  if(!keywordId) {
+    return []
+  }
+  const shops = state.search.searchedShopsByKeyword[keywordId]
+  return shops.ids.map(id => {
+    return getShopById(state, id)
+  })
+}
+
+export const getCurrentKeyword = state => {
+  const keywordId = state.search.historyKeywords[0]
+  if(!keywordId) {
+    return ''
+  }
+  return getKeywordById(state, keywordId).keyword
 }
