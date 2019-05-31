@@ -73,6 +73,7 @@ class Search extends Component {
     setInputText(item.keyword)
     addHistoryKeyword(item.id)
     // 跳转搜索结果页逻辑 todo
+    this.props.history.push('/search_result')
   }
 
   // 清除历史记录
