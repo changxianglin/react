@@ -80,3 +80,10 @@ const reducer = (state = inititalState, action) => {
 }
 
 export default reducer
+
+// selector
+export const getUsername = (state) => state.login.username
+
+export const getPassword = (state) => state.login.passwords
+
+export const isLogin = (state) => state.login.status
