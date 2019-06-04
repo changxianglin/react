@@ -1,6 +1,13 @@
 import url from '../../utils/url'
 import {FETCH_DATA} from '../middleware/api'
-import { schema } from './entities/orders'
+import { 
+  schema,
+  USED_TYPE,
+  TO_PAY_TYPE,
+  AVAILABLE_TYPE,
+  REFUND_TYPE, 
+} from './entities/orders'
+import { combineReducers } from 'redux';
 
 const initialState = {
   orders: {
@@ -22,7 +29,7 @@ export const types = {
   SET_CURRENT_TAB: 'USER/SET_CURRENT_TAB',
 }
 
-export default actions = {
+export const actions = {
   // 获取订单列表
   loaderOrders: () => {
     return (dispatch, getState) => {
@@ -52,3 +59,50 @@ const fetchOrders = (endpoint) => ({
     schema,
   }
 }) 
+
+
+// reducers
+const orders = (state = initialState.orders, action) => {
+  switch(action.type) {
+    case types.FETCH_ORDERS_REQUEST:
+      return {...state, isFetching: true}
+    case types.FETCH_ORDERS_SUCCESS:
+      const toPayIds = action.response.ids.filter(
+          id => action.response.orders[id] === TO_PAY_TYPE 
+        )
+      const availableIds = action.response.ids.filter(
+          id => action.response.orders[id] ===  AVAILABLE_TYPE
+        )
+      const refundIds = action.response.ids.filter(
+          id => action.response.orders[id] ===  REFUND_TYPE
+        )
+      return {
+        ...state,
+        isFetching: false,
+        ids: state.ids.concat(action.response.ids),
+        toPayIds: state.toPayIds.concat(toPayIds),
+        availableIds: state.availableIds.concat(availableIds),
+        refundIds: state.refundIds.concat(refundIds),
+      }
+    case types.FETCH_ORDERS_FAILURE:
+      return {...state, isFetching: false}
+    default:
+      return state
+  }
+}
+
+const currentTab = (state = initialState.currentTab, action) => {
+  switch(action.type) {
+    case types.SET_CURRENT_TAB:
+      return action.index
+    default:
+      return state
+  }
+}
+
+const reducer = combineReducers({
+  orders,
+  currentTab,
+})
+
+export default reducer
