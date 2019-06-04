@@ -32,9 +32,14 @@ export default class UserMain extends Component {
   renderOrderList = (data) => {
     return data.map(item => {
       return (
-        <OrderItem key = {item.id} data = {item} />
+        <OrderItem key = {item.id} data = {item} onRemove = {this.handleRemove} />
       )
     })
+  }
+
+  // 删除订单
+  handleRemove = () => {
+
   }
 
   renderEmpty = () => {

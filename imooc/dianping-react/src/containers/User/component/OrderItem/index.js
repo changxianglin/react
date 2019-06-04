@@ -27,10 +27,15 @@ export default class OrderItem extends Component {
                 <div className = 'orderItem__btn'>评价</div>
               ) : null  
             }
-            <div className = 'orderItem__btn'>删除</div>
+            <div className = 'orderItem__btn' onClick = {this.handleRemove}>删除</div>
           </div>
         </div>
       </div>
     )
+  }
+
+  // 删除订单
+  handleRemove = () => {
+    this.props.onRemove()
   }
 }
