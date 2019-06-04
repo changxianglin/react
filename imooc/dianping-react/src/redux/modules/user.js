@@ -2,10 +2,10 @@ import url from '../../utils/url'
 import {FETCH_DATA} from '../middleware/api'
 import { 
   schema,
-  USED_TYPE,
   TO_PAY_TYPE,
   AVAILABLE_TYPE,
   REFUND_TYPE, 
+  getOrderById,
 } from './entities/orders'
 import { combineReducers } from 'redux';
 
@@ -68,13 +68,13 @@ const orders = (state = initialState.orders, action) => {
       return {...state, isFetching: true}
     case types.FETCH_ORDERS_SUCCESS:
       const toPayIds = action.response.ids.filter(
-          id => action.response.orders[id] === TO_PAY_TYPE 
+          id => action.response.orders[id].type === TO_PAY_TYPE 
         )
       const availableIds = action.response.ids.filter(
-          id => action.response.orders[id] ===  AVAILABLE_TYPE
+          id => action.response.orders[id].type ===  AVAILABLE_TYPE
         )
       const refundIds = action.response.ids.filter(
-          id => action.response.orders[id] ===  REFUND_TYPE
+          id => action.response.orders[id].type ===  REFUND_TYPE
         )
       return {
         ...state,
@@ -106,3 +106,13 @@ const reducer = combineReducers({
 })
 
 export default reducer
+
+// selectors
+export const getCurrentTab = state => state.user.currentTab
+
+export const getOrders = state => {
+  const key = ['ids', 'toPayIds', 'availableIds', 'refundIds'][state.user.currentTab]
+  return state.user.orders[key].map(id => {
+    return getOrderById(state, id)
+  })
+}

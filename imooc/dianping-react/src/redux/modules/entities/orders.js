@@ -13,3 +13,9 @@ export const REFUND_TYPE = 4  // 退款
 const reducer = createReducer(schema.name)
 
 export default reducer
+
+// selector
+
+export const getOrderById = (state, id) => {
+  return state.entities.orders[id]
+}
