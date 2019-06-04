@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import OrderItem from '../OrderItem'
 import './style.css'
 
 const data = [
