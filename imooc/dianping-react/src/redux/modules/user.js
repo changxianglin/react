@@ -18,6 +18,10 @@ const initialState = {
     refundIds: [], // 退款订单 id
   },
   currentTab: 0,
+  currentOrder: {
+    id: null,
+    isDeleting: false,
+  },
 }
 
 export const types = {
@@ -27,6 +31,10 @@ export const types = {
   FETCH_ORDERS_FAILURE: 'USER/FETCH_ORDERS_FAILURE',
   // 设置当前选中的 tab
   SET_CURRENT_TAB: 'USER/SET_CURRENT_TAB',
+  // 删除订单
+  DELETE_ORDERS_REQUEST: 'USER/DELETE_ORDERS_REQUEST',
+  DELETE_ORDERS_SUCCESS: 'USER/DELETE_ORDERS_SUCCESS',
+  DELETE_ORDERS_FAILURE: 'USER/DELETE_ORDERS_FAILURE',
 }
 
 export const actions = {
@@ -45,8 +53,32 @@ export const actions = {
   setCurrentTab: index => ({
     type: types.SET_CURRENT_TAB,
     index,
-  })
+  }),
+  // 删除订单
+  removeOrder: () => {
+    return (dispatch, getState) => {
+      const { id } = getState().user.currentOrder
+      if(id) {
+        dispatch(deleteOrderRequest())
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteOrderSuccess(id))
+            resolve()
+          }, 500)
+        })
+      }
+    }
+  }
 }
+
+const deleteOrderRequest = () => ({
+  type: types.DELETE_ORDERS_REQUEST,
+})
+
+const deleteOrderSuccess = (orderId) => ({
+  type: types.DELETE_ORDERS_SUCCESS,
+  orderId
+})
 
 const fetchOrders = (endpoint) => ({
   [FETCH_DATA]: {
