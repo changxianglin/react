@@ -22,7 +22,16 @@ export const actions = {
   }) 
 }
 
-const reducer = createReducer(schema.name)
+const normalReducer = createReducer(schema.name)
+
+const reducer = (state = {}, action) => {
+  if(action.type === types.DELETE_ORDER) {
+   const {[action.orderId]: deleteOrder, ...restOrders} = state  
+   return restOrders
+  } else {
+    return  normalReducer(state, action)
+  }
+}
 
 export default reducer
 
