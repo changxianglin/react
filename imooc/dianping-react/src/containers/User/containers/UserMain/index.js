@@ -7,13 +7,14 @@ import {
   getDeletingOrderId,
 } from '../../../../redux/modules/user'
 import OrderItem from '../../component/OrderItem'
+import Confirm from '../../../../components/Confirm'
 import './style.css'
 
 const tabTitles = ["全部订单", "待付款", "可使用", "退款/售后"]
 
 class UserMain extends Component {
   render() {
-    const { currentTab, data } = this.props
+    const { currentTab, data, deletingOrderId } = this.props
     return (
       <div className = 'userMain'>
         <div className = 'userMain__menu'>
@@ -31,6 +32,9 @@ class UserMain extends Component {
           {
             data && data.length > 0 ? this.renderOrderList(data) : this.renderEmpty()
           }
+          {
+            deletingOrderId ? this.renderConfirmDialog() : null
+          }
         </div>
       </div>
     )
@@ -39,14 +43,28 @@ class UserMain extends Component {
   renderOrderList = (data) => {
     return data.map(item => {
       return (
-        <OrderItem key = {item.id} data = {item} onRemove = {this.handleRemove} />
+        <OrderItem key = {item.id} data = {item} onRemove = {this.handleRemove.bind(this, item.id)} />
       )
     })
   }
 
-  // 删除订单
-  handleRemove = () => {
+  // 删除对话框
+  renderConfirmDialog = () => {
+    const { userActions: {hideDeleteDialog, removeOrder}} = this.props
+    return (
+      <Confirm 
+      content = '确定删除该订单吗？'
+      cancelText = '取消'
+      confirmText = '确定'
+      onCancel = {hideDeleteDialog}
+      onConfirm = {removeOrder}
+      />
+    )
+  }
 
+  // 删除订单
+  handleRemove = (orderId) => {
+    this.props.userActions.showDeleteDialog(orderId)
   }
 
   renderEmpty = () => {
@@ -60,7 +78,7 @@ class UserMain extends Component {
   }
 
   handleClickTab = (index) => {
-    this.props.onSetCurrentTab(index)
+    this.props.userActions.setCurrentTab(index)
   }
 }
 
