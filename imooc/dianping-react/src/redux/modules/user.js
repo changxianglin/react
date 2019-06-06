@@ -197,7 +197,7 @@ export const getOrders = state => {
   })
 }
 
-export const getDeleteingOrderId = (state) => {
+export const getDeletingOrderId = (state) => {  
   return state.user.currentOrder && 
   state.user.currentOrder.isDeleting ? 
   state.user.currentOrder.id : null

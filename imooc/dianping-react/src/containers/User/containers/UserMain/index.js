@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-import OrderItem from '../OrderItem'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import {
+  actions as userActions,
+  getCurrentTab,
+  getDeletingOrderId,
+} from '../../../../redux/modules/user'
+import OrderItem from '../../component/OrderItem'
 import './style.css'
 
 const tabTitles = ["全部订单", "待付款", "可使用", "退款/售后"]
 
-export default class UserMain extends Component {
+class UserMain extends Component {
   render() {
     const { currentTab, data } = this.props
     return (
@@ -56,3 +63,18 @@ export default class UserMain extends Component {
     this.props.onSetCurrentTab(index)
   }
 }
+
+const mapStateToProps = (state, props) => {
+  return {
+    currentTab: getCurrentTab(state),
+    deletingOrderId: getDeletingOrderId(state),
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userActions: bindActionCreators(userActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserMain)
