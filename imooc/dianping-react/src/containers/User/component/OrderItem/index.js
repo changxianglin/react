@@ -34,6 +34,27 @@ export default class OrderItem extends Component {
     )
   }
 
+  // 渲染订单评价区域的 DOM
+  renderEditAres = () => {
+    return (
+      <div className = 'orderItem__commentContainer'>
+        <textarea 
+          className = 'orderItem__comment' 
+          onChange = {this.handleCommentChange}
+          value = ''
+        />
+        { this.renderStars() }
+        <button className = 'orderItem__commentBtn' onClick = {null}>提交</button>
+        <button className = 'orderItem__commentBtn' onClick = {null}>取消</button>
+      </div>
+    )
+  }
+
+  // 评价信息发生变化
+  handleCommentChange = () => {
+
+  }
+
   // 删除订单
   handleRemove = () => {
     this.props.onRemove()
