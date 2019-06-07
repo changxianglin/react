@@ -30,12 +30,13 @@ export default class OrderItem extends Component {
             <div className = 'orderItem__btn' onClick = {this.handleRemove}>删除</div>
           </div>
         </div>
+        { this.renderEditArea() }
       </div>
     )
   }
 
   // 渲染订单评价区域的 DOM
-  renderEditAres = () => {
+  renderEditArea = () => {
     return (
       <div className = 'orderItem__commentContainer'>
         <textarea 
@@ -46,6 +47,26 @@ export default class OrderItem extends Component {
         { this.renderStars() }
         <button className = 'orderItem__commentBtn' onClick = {null}>提交</button>
         <button className = 'orderItem__commentBtn' onClick = {null}>取消</button>
+      </div>
+    )
+  }
+
+  // 评价星际
+  renderStars = () => {
+    return (
+      <div className = 'orderItem__starContainer'>
+        {
+          [1, 2, 3, 4, 5].map((item, index) => {
+            const lightClass = 3 >= item ? 'orderItem__star--light' : ''
+            return (
+              <span 
+                className = {'orderItem__star ' + lightClass}
+                key = {index}
+                onClick = {null}
+              >★</span>
+            )
+          })
+        }
       </div>
     )
   }
