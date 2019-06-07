@@ -9,6 +9,9 @@ import {
   types as orderTypes,
   actions as orderActions
 } from './entities/orders'
+import {
+  action as commentActions
+} from './entities/comments'
 import { combineReducers } from 'redux';
 
 const initialState = {
@@ -129,6 +132,10 @@ export const actions = {
             stars: stars,
             content: comment, 
           }
+          dispatch(postCommentSuccess())
+          dispatch(commentActions.addComment(commentObj))
+          dispatch(orderActions.addComment(id, commentObj.id))
+          resolve()
         }, 500)
       })
     }
@@ -227,10 +234,28 @@ const currentOrder = (state = initialState.currentOrder, action) => {
         id: action.orderId,
         isDeleting: true,
       }
+    case types.SHOW_COMMENT_AREA:
+      return {
+        ...state,
+        id: action.orderId,
+        isCommenting: true,
+      }
     case types.HIDDEN_DELETE_DIALOG:
     case types.DELETE_ORDERS_SUCCESS:
     case types.DELETE_ORDERS_FAILURE:
+    case types.POST_COMMENT_SUCCESS:
+    case types.POST_COMMENT_FAILURE:
       return initialState.currentOrder
+    case types.SET_COMMENT:
+      return {
+        ...state,
+        comment: action.comment,
+      }
+    case types.SET_STARS:
+      return {
+        ...state,
+        stars: action.stars,
+      }
     default:
       return state
   }
