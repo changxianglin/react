@@ -23,6 +23,9 @@ const initialState = {
   currentOrder: {
     id: null,
     isDeleting: false,
+    isCommenting: false,
+    comment: '',
+    stars: 0,
   },
 }
 
@@ -40,6 +43,17 @@ export const types = {
   // 删除确认对话框
   SHOW_DELETE_DIALOG: 'USER/SHOW_DELETE_DIALOG',
   HIDDEN_DELETE_DIALOG: 'USER/HIDDEN_DELETE_DIALOG',
+  // 评价订单编辑
+  SHOW_COMMENT_AREA: 'USER/SHOW_COMMENT_AREA',
+  HIDE_COMMENT_AREA: 'USER/HIDE_COMMENT_AREA', 
+  // 编辑评价内容
+  SET_COMMENT: 'USER/SET_COMMENT',
+  // 打分
+  SET_STARS: 'USER/SET_STARS',
+  // 提交评价
+  POST_COMMENT_REQUEST: 'USER/POST_COMMENT_REQUEST',
+  POST_COMMENT_SUCCESS: 'USER/POST_COMMENT_SUCCESS',
+  POST_COMMENT_FAILURE: 'USER/POST_COMMENT_FAILURE',
 }
 
 export const actions = {
@@ -83,7 +97,42 @@ export const actions = {
   // 隐藏删除对话框
   hiddenDeleteDialog: () => ({
     type: types.HIDDEN_DELETE_DIALOG,
-  })
+  }),
+  // 显示订单评价编辑框
+  showCommentArea: (orderId) => ({
+    type: types.SHOW_COMMENT_AREA,
+    orderId,
+  }),
+  // 隐藏订单评价编辑框
+  hideCommentArea: () => ({
+    type: types.HIDE_COMMENT_AREA,
+  }),
+  // 设置评价信息的
+  setComment: (comment) => ({
+    type: types.SET_COMMENT,
+    comment,
+  }),
+  // 设置评价等级
+  setStars: (stars) => ({
+    type: types.SET_STARS,
+    stars,
+  }),
+  // 提交评价
+  submitComment: () => {
+    return (dispatch, getState) => {
+      dispatch(postCommentRequest())
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const { currentOrder: {id, stars, comment}} = getState().user
+          const commentObj = {
+            id: +new Date(),
+            stars: stars,
+            content: comment, 
+          }
+        }, 500)
+      })
+    }
+  }
 }
 
 const deleteOrderRequest = () => ({
@@ -93,6 +142,14 @@ const deleteOrderRequest = () => ({
 const deleteOrderSuccess = (orderId) => ({
   type: types.DELETE_ORDERS_SUCCESS,
   orderId
+})
+
+const postCommentRequest = () => ({
+  type: types.POST_COMMENT_REQUEST,
+})
+
+const postCommentSuccess = () => ({
+  type: types.POST_COMMENT_SUCCESS,
 })
 
 const fetchOrders = (endpoint) => ({
