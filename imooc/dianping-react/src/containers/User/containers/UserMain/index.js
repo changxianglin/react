@@ -56,7 +56,9 @@ class UserMain extends Component {
           onCommentChange = {this.handleCommentChange}
           onStarsChange = {this.handleStarsChange}
           onComment = {this.handleComment.bind(this, item.id)}
-          onRemove = {this.handleRemove.bind(this, item.id)} 
+          onRemove = {this.handleRemove.bind(this, item.id)}
+          onSubmitComment = {this.handleSubmitComment}
+          onCancelComment = {this.handleCancelComment}
         />
       )
     })
@@ -92,6 +94,19 @@ class UserMain extends Component {
     const { userActions: {setComment}} = this.props
     setComment(comment)
   }
+
+  // 提交评价
+  handleSubmitComment = () => {
+    const {userActions: {submitComment}} = this.props
+    submitComment()
+  }
+
+  // 取消评价
+  handleCancelComment = () => {
+    const { userActions: {hideCommentArea}} = this.props
+    hideCommentArea()
+  }
+
   // 删除订单
   handleRemove = (orderId) => {
     this.props.userActions.showDeleteDialog(orderId)

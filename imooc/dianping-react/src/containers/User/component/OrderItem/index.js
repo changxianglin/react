@@ -3,7 +3,7 @@ import './style.css'
 
 export default class OrderItem extends Component {
   render() {
-    const { data: { title, statusText, orderPicUrl, channel, text, type }} = this.props
+    const { data: { title, statusText, orderPicUrl, channel, text, type, commentId }} = this.props
     return (
       <div className = 'orderItem'>
         <div className = 'orderItem__title'>
@@ -23,8 +23,8 @@ export default class OrderItem extends Component {
           <div className = 'orderItem__type'>{channel}</div>
           <div className = ''>
             {
-              type === 1 ? (
-                <div className = 'orderItem__btn'>评价</div>
+              type === 1 && !commentId ? (
+                <div className = 'orderItem__btn' onClick = {this.handleComment}>评价</div>
               ) : null  
             }
             <div className = 'orderItem__btn' onClick = {this.handleRemove}>删除</div>
@@ -42,27 +42,28 @@ export default class OrderItem extends Component {
         <textarea 
           className = 'orderItem__comment' 
           onChange = {this.handleCommentChange}
-          value = ''
+          value = {this.props.comment}
         />
         { this.renderStars() }
-        <button className = 'orderItem__commentBtn' onClick = {null}>提交</button>
-        <button className = 'orderItem__commentBtn' onClick = {null}>取消</button>
+        <button className = 'orderItem__commentBtn' onClick = {this.props.onSubmitComment}>提交</button>
+        <button className = 'orderItem__commentBtn' onClick = {this.props.onCanelComment}>取消</button>
       </div>
     )
   }
 
   // 评价星际
   renderStars = () => {
+    const {stars} = this.props 
     return (
       <div className = 'orderItem__starContainer'>
         {
           [1, 2, 3, 4, 5].map((item, index) => {
-            const lightClass = 3 >= item ? 'orderItem__star--light' : ''
+            const lightClass = stars >= item ? 'orderItem__star--light' : ''
             return (
               <span 
                 className = {'orderItem__star ' + lightClass}
                 key = {index}
-                onClick = {null}
+                onClick = {this.props.onStarsChange.bind(this, item)}
               >★</span>
             )
           })
@@ -71,9 +72,17 @@ export default class OrderItem extends Component {
     )
   }
 
-  // 评价信息发生变化
-  handleCommentChange = () => {
+  // 评价按钮点击状态
+  handleComment = () => {
+    const {
+      data: {id}
+    } = this.props
+    this.props.onComment(id)
+  }
 
+  // 评价信息发生变化
+  handleCommentChange = (e) => {
+    this.props.onCommentChange(e.target.value)
   }
 
   // 删除订单
