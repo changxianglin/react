@@ -14,7 +14,11 @@ export const types = {
   DELETE_ORDER: 'ORDERS/DELETE_ORDER',
   // 新增评价
   ADD_COMMENT: 'ORDERS/ADD_COMMENT',
+  // 增加订单
+  ADD_ORDER: 'ORDERS/ADD_ORDER',
 }
+
+let orderIdCounter = 10
 
 export const actions = {
   // 删除订单
@@ -27,7 +31,16 @@ export const actions = {
     type: types.ADD_COMMENT,
     orderId,
     commentId,
-  })
+  }),
+  // 增加订单
+  addOrder: order => {
+    const orderId = `${orderIdCounter++}`
+    return {
+      type: types.ADD_ORDER,
+      orderId,
+      order: {...order, id: orderId}
+    }
+  }
 }
 
 const normalReducer = createReducer(schema.name)
@@ -40,6 +53,11 @@ const reducer = (state = {}, action) => {
         ...state[action.orderId],
         commentId: action.commentId,
       }
+    }
+  } else if(action.type === types.ADD_ORDER) {
+    return {
+      ...state,
+      [action.orderId]: action.order,
     }
   } else if(action.type === types.DELETE_ORDER) {
    const {[action.orderId]: deleteOrder, ...restOrders} = state  
