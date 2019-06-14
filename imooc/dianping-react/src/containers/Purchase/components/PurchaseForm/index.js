@@ -3,6 +3,8 @@ import './style.css'
 
 export default class PurchaseForm extends Component {
   render() {
+    const {product: {currentPrice}, quantity, phone} = this.props
+    const totalPrice = (currentPrice * quantity).toFixed(1)
     return (
       <div className = 'purchaseForm'>
         <div className = 'purchaseForm__wrapper'>
@@ -18,7 +20,8 @@ export default class PurchaseForm extends Component {
               <input
                 className="purchaseForm__quantity"
                 onChange={this.handleChange}
-                value={0}
+                type = 'number'
+                value={quantity}
               />
               <span
                 className="purchaseForm__counter--inc"
@@ -31,12 +34,12 @@ export default class PurchaseForm extends Component {
           <div className = 'purchaseForm__row'>
             <div className = 'purchaseForm__rowLabel'>小计</div>
             <div className = 'purchaseForm__rowValue'>
-              <span className = 'purchaseForm__totalPrice'>￥120.0</span>
+              <span className = 'purchaseForm__totalPrice'>￥{totalPrice}</span>
             </div>
           </div>
           <div className = 'purchaseForm__row'>
             <div className = 'purchaseForm__rowLabel'>手机号</div>
-            <div className = 'purchaseForm__rowValue'>1242348787</div>
+            <div className = 'purchaseForm__rowValue'>{phone}</div>
           </div>
         </div>
           <ul className = 'purchaseForm__remark'>
@@ -54,19 +57,27 @@ export default class PurchaseForm extends Component {
     )
   }
 
-  handleChange = () => {
-    
+  handleChange = (e) => {
+    const quantity = e.target.value || 0
+    this.props.onSetQuantity(Number.parseInt(quantity))
   }
 
   handleDecrease = () => {
-
+    const {quantity} = this.props
+    if(quantity > 0) {
+      this.props.onSetQuantity(quantity - 1)
+    }
   }
 
   handleIncrease = () => {
-    
+    const {quantity} = this.props
+    this.props.onSetQuantity(quantity + 1)
   }
 
   handleClick = () => {
-
+    const {quantity} = this.props
+    if(quantity > 0) {
+      this.props.onSubmit()
+    }
   }
 }

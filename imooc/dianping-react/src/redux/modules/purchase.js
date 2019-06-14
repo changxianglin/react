@@ -67,3 +67,16 @@ const reducer = (state = initialState, action) => {
 }
 
 export default reducer
+
+// selectors
+export const getQuantity = (state) => {
+  return state.purchase.quantity
+}
+
+export const getTipStatus = (state) => {
+  return state.purchase.showTip
+}
+
+export const getProduct = (state, id) => {
+  return getProductDetail(state, id)
+}
