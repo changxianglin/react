@@ -6,13 +6,6 @@ import ErrorToast from '../../components/ErrorToast'
 import { actions as appActions, getError } from '../../redux/modules/app';
 import AsyncComponent from '../../utils/AsyncComponent'
 import PrivateRoute from '../PrivateRoute'
-// import Home from '../Home'
-// import ProductDetail from '../ProductDetail';
-// import Search from '../Search'
-// import SearchResult from '../SearchResult'
-// import Login from '../Login';
-// import User from '../User'
-// import Purchase from '../Purchase'
 
 const Home = AsyncComponent(() => import('../Home'))
 const ProductDetail = AsyncComponent(() => import('../ProductDetail'))
