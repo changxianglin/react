@@ -5,7 +5,7 @@ import {
   TO_PAY_TYPE,
   AVAILABLE_TYPE,
   REFUND_TYPE, 
-  getOrderById,
+  getAllOrders,
   types as orderTypes,
   actions as orderActions
 } from './entities/orders'
@@ -13,6 +13,7 @@ import {
   action as commentActions
 } from './entities/comments'
 import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 
 const typeToKey = {
   [TO_PAY_TYPE]: 'toPayIds',
@@ -291,12 +292,15 @@ export default reducer
 // selectors
 export const getCurrentTab = state => state.user.currentTab
 
-export const getOrders = state => {
-  const key = ['ids', 'toPayIds', 'availableIds', 'refundIds'][state.user.currentTab]
-  return state.user.orders[key].map(id => {
-    return getOrderById(state, id)
-  })
-}
+const getUserOrders = state => state.user.orders
+
+export const getOrders = createSelector([getCurrentTab, getUserOrders, getAllOrders], (tabIndex, userOrders, orders) => {
+    const key = ['ids', 'toPayIds', 'availableIds', 'refundIds'][tabIndex]
+    const orderIds = userOrders[key]
+    return orderIds.map(id => {
+      return orders[id]
+    })
+})
 
 export const getDeletingOrderId = (state) => {  
   return state.user.currentOrder && 
