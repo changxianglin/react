@@ -14,9 +14,16 @@ import {
 } from './entities/comments'
 import { combineReducers } from 'redux';
 
+const typeToKey = {
+  [TO_PAY_TYPE]: 'toPayIds',
+  [AVAILABLE_TYPE]: 'availableIds',
+  [REFUND_TYPE]: 'refundIds',
+}
+
 const initialState = {
   orders: {
     isFetching: false,
+    fetched: false, //购买页面使用
     ids: [],
     toPayIds: [], //待付款的订单 id
     availableIds: [], // 可使用的订单 id 
@@ -63,8 +70,8 @@ export const actions = {
   // 获取订单列表
   loaderOrders: () => {
     return (dispatch, getState) => {
-      const { ids } = getState().user.orders
-      if(ids.length > 0) {
+      const { fetched } = getState().user.orders
+      if(fetched) {
         return null
       }
       const endpoint = url.getOrders()
@@ -190,6 +197,7 @@ const orders = (state = initialState.orders, action) => {
       return {
         ...state,
         isFetching: false,
+        fetched: true,
         ids: state.ids.concat(action.response.ids),
         toPayIds: state.toPayIds.concat(toPayIds),
         availableIds: state.availableIds.concat(availableIds),
@@ -203,6 +211,17 @@ const orders = (state = initialState.orders, action) => {
         toPayIds: removeOrderId(state, 'toPayIds', action.orderId),
         availableIds: removeOrderId(state, 'availableIds', action.orderId),
         refundIds: removeOrderId(state, 'refundIds', action.orderId),
+      }
+    case orderTypes.ADD_ORDER:
+      const { order } = action
+      const key = typeToKey[order.type]
+      return key ? {
+        ...state,
+        ids: [order.id].concat(state.ids),
+        [key]: [order.id].concat(state[key])
+      } : {
+        ...state,
+        ids: [order.id].concat(state.ids)
       }
     case types.FETCH_ORDERS_FAILURE:
       return {...state, isFetching: false}
