@@ -3,15 +3,24 @@ import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ErrorToast from '../../components/ErrorToast'
-import Home from '../Home'
 import { actions as appActions, getError } from '../../redux/modules/app';
-import ProductDetail from '../ProductDetail';
-import Search from '../Search'
-import SearchResult from '../SearchResult'
-import Login from '../Login';
+import AsyncComponent from '../../utils/AsyncComponent'
 import PrivateRoute from '../PrivateRoute'
-import User from '../User'
-import Purchase from '../Purchase'
+// import Home from '../Home'
+// import ProductDetail from '../ProductDetail';
+// import Search from '../Search'
+// import SearchResult from '../SearchResult'
+// import Login from '../Login';
+// import User from '../User'
+// import Purchase from '../Purchase'
+
+const Home = AsyncComponent(() => import('../Home'))
+const ProductDetail = AsyncComponent(() => import('../ProductDetail'))
+const Search = AsyncComponent(() => import('../Search'))
+const SearchResult = AsyncComponent(() => import('../SearchResult'))
+const Login = AsyncComponent(() => import('../Login'))
+const User = AsyncComponent(() => import('../User'))
+const Purchase = AsyncComponent(() => import('../Purchase'))
 
 
 class App extends Component{
