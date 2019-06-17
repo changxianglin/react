@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+  <h1>TEST Ajax request</h1>
+  <button>BUTTON</button>
+  <div class="content"></div>
+  <script>
+    var url = ['/bar', '/boo', '/foo']
+
+    var requestUrl = function(arr) {
+      return Array.isArray(url) ? url[0] : null
+    }
+
+    var requestAjax = function(url) {
+      var getUrl =  requestUrl(url)
+      if(!getUrl) {
+        return 
+      }
+      $.ajax(
+          {
+            url: getUrl,
+            success:function(result){
+              console.log(result)
+              var content = $('.content').text()
+              $('.content').html('<span>' + content + result.data.url + ', ' + '</span>')
+              if(url.shift() && url) {
+                requestAjax(url)
+              }
+            }
+          }
+        );
+    }
+
+    $("button").click(function(){
+      requestAjax(url)
+    });
+  </script>
+</body>
+</html>
