@@ -1,0 +1,2 @@
+export const SEARCH_FOCUS = 'HEADER/SAERCH_FOCUS'
+export const SEARCH_BLUR = 'HEADER/SEARCH_BLUR' 
