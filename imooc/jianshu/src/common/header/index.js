@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import  { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {
@@ -11,8 +11,7 @@ import {
     Addition,
     Button,
 } from './style'
-class Header extends Component {
-  render() {
+const Header = (props) => {
     return (
       <div>
         <HeaderWrapper>
@@ -26,17 +25,17 @@ class Header extends Component {
             </NavItem>
             <SearchWrapper>
               <CSSTransition
-                in = {this.props.focused}
+                in = {props.focused}
                 timeout = {200}
                 classNames = 'slide'
               >
                 <NavSearch 
-                onBlur = {this.props.handleInputBlur}
-                onFocus = {this.props.handleInputFocus} 
-                className = {this.props.focused ? 'focused' : ''}>
+                onBlur = {props.handleInputBlur}
+                onFocus = {props.handleInputFocus} 
+                className = {props.focused ? 'focused' : ''}>
                 </NavSearch>
                 </CSSTransition>
-                <i className = {this.props.focused ? 'focused iconfont' : 'iconfont'}>&#xe6cf;</i>
+                <i className = {props.focused ? 'focused iconfont' : 'iconfont'}>&#xe6cf;</i>
             </SearchWrapper>
           </Nav>
           <Addition>
@@ -50,11 +49,10 @@ class Header extends Component {
       </div>
     )
   }
-}
 
 const mapStateToProps = (state) => {
   return {
-    focused: state.focused
+    focused: state.header.focused
   }
 }
 
