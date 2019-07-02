@@ -1,0 +1,31 @@
+.scoll-header {
+  position: fixed;
+  height: 100px;
+  line-height: 100px;
+  width: 100%;
+  text-align: center;
+  background-color: bisque;
+  color: #000000;
+}
+
+.scoll-fill {
+  height: 100px;
+}
+
+.scoll-left {
+  position: fixed;
+  display: inline-block;
+  height: 3000px;
+  width: 50%;
+  text-align: center;
+  background-color: cadetblue;
+}
+
+.socll-right {
+  display: inline-block;
+  height: 3000px;
+  width: 50%;
+  text-align: center;
+  background-color: thistle;
+  margin-left: 50%;
+}
