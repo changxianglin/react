@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import Header from './common/header'
 import Test from './Test'
 import Scoll from './Scoll'
+import Alert from './Alert'
 import store from './store'
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
       <Header />  
       {/* <Test /> */}
       {/* <Scoll /> */}
+      {/* <Alert /> */}
     </Provider>
   )
 }
