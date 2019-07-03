@@ -20,7 +20,7 @@ import {
 
 class Header extends Component {
   getListArea() {
-    const { list, page, totalPage, focused, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage  } = this.props
+    const { list, page, totalPage, focused, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props
     const newList = list.toJS()
     const pageList = []
 
@@ -58,6 +58,7 @@ class Header extends Component {
   }
 
   render() {
+    const { handleInputBlur, handleInputFocus, list, focused } = this.props
     return (
       <div>
         <HeaderWrapper>
@@ -76,12 +77,12 @@ class Header extends Component {
                 classNames = 'slide'
               >
                 <NavSearch 
-                onBlur = {this.props.handleInputBlur}
-                onFocus = {this.props.handleInputFocus} 
-                className = {this.props.focused ? 'focused' : ''}>
+                onBlur = {handleInputBlur}
+                onFocus = {() => handleInputFocus(list)} 
+                className = {focused ? 'focused' : ''}>
                 </NavSearch>
                 </CSSTransition>
-                <i className = {this.props.focused ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe6cf;</i>
+                <i className = {focused ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe6cf;</i>
                 {
                   this.getListArea()
                 }
@@ -112,8 +113,10 @@ const mapStateToProps = (state) => {
 
 const mapDisptchToProps = (dispatch) => {
   return {
-    handleInputFocus() {
-      dispatch(actionCreators.getList())
+    handleInputFocus(list) {
+      if(list.size === 0) {
+        dispatch(actionCreators.getList())
+      }
       dispatch(actionCreators.searchFocus())
     },
     handleInputBlur() {
