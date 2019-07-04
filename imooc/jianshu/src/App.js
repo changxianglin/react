@@ -7,7 +7,10 @@ import Detail from './page/Detail'
 import Test from './Test'
 import Scoll from './Scoll'
 import Alert from './Alert'
+import Modal from './Modal'
 import store from './store'
+
+import './index.css'
 
 const App = () => {
   return (
@@ -18,6 +21,7 @@ const App = () => {
           <Switch>
             <Route path = '/' exact component = {Home} />
             <Route path = '/detail' component = {Detail} />
+            <Route path = '/modal' component = {Modal} />
           </Switch>
         </Router>   
       </div> 
