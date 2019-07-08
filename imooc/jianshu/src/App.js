@@ -9,6 +9,7 @@ import Scoll from './Scoll'
 import Alert from './Alert'
 import Modal from './Modal'
 import Mobile from './Mobile'
+import Mask from './Mask'
 import store from './store'
 
 import './index.css'
@@ -21,6 +22,7 @@ const App = () => {
         <Header />
         <Router>
           <Switch>
+            {/* <Route component = {Mask} /> */}
             <Route path = '/' exact component = {Home} />
             <Route path = '/detail' component = {Detail} />
             <Route path = '/modal' component = {Modal} />
