@@ -18,9 +18,8 @@ import 'antd-mobile/dist/antd-mobile.css'
 const App = () => {
   return (
     <Provider store = {store}>
-      <div>
-        <Header />
         <Router>
+          <Route component = {Header} />
           <Switch>
             {/* <Route component = {Mask} /> */}
             <Route path = '/' exact component = {Home} />
@@ -29,7 +28,6 @@ const App = () => {
             <Route path = '/mobile' component = {Mobile} />
           </Switch>
         </Router>   
-      </div> 
       {/* <Test /> */}
       {/* <Scoll /> */}
       {/* <Alert /> */}
