@@ -12,7 +12,7 @@ export const  LoginWrapper = styled.div`
 
 export const LoginBox = styled.div`
   width: 400px;
-  height: 200px;
+  height: 180px;
   margin: 50px auto;
   padding-top: 20px;
   background: #fff;
@@ -27,4 +27,15 @@ export const Input = styled.input`
   padding: 0 10px;
   margin: 10px auto;
   color: #777;
+`
+
+export const Button = styled.div`
+  width: 220px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  background: #3194d0;
+  border-radius: 15px;
+  margin: 10px auto;
+  text-align: center;
 `
