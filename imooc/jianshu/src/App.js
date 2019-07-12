@@ -5,6 +5,7 @@ import Header from './common/header'
 import Home from './page/Home'
 import Detail from './page/Detail'
 import Login from './page/Login'
+import Write from './page/Write'
 import Test from './Test'
 import Scoll from './Scoll'
 import Alert from './Alert'
@@ -25,6 +26,7 @@ const App = () => {
             {/* <Route component = {Mask} /> */}
             <Route path = '/' exact component = {Home} />
             <Route path = '/detail/:id' component = {Detail} />
+            <Route path = '/write' component = {Write} />
             <Route path = '/modal' component = {Modal} />
             <Route path = '/mobile' component = {Mobile} />
             <Route path = '/login' component = {Login} />
