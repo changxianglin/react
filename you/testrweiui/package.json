@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.11.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express": "^4.16.4",
     "finalhandler": "^1.1.1",
     "react": "^16.7.0",
